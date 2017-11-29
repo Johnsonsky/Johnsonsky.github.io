@@ -1,0 +1,232 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>NOIP2017游记 | Johnson&#39;s Blog</title>
+  <meta name="author" content="Johnson">
+  
+  <meta name="description" content="Johnson&#39;s Blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="NOIP2017游记"/>
+  <meta property="og:site_name" content="Johnson&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Johnson&#39;s Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--><!-- hexo-inject:begin --><link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css'><!-- hexo-inject:end -->
+  
+
+</head>
+
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Johnson&#39;s Blog</a></h1>
+  <h2><a href="/">Let life be beautiful like summer flowers and death like autumn leaves.</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/index">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About Me</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2017-11-28T00:00:00.000Z"><a href="/2017/11/28/NOIP2017解题报告/index/">2017-11-28</a></time>
+      
+      
+  
+    <h1 class="title">NOIP2017游记</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>或许是最后一场NOIP了，要努力啊…</p>
+<a id="more"></a>
+<h1 id="Day0"><a href="#Day0" class="headerlink" title="Day0"></a>Day0</h1><p>上午坐车前往日照一中，竟然是前几批到的…</p>
+<p>抽到了曲师大14考场55号位，同校liutao大佬居然跟我一个考场，瞬间RP++。</p>
+<p>又在1号楼住宿，食堂的伙食与去年基本一样，无法细细评价…</p>
+<p>下午在宿舍里闷声睡大觉，养精蓄锐。</p>
+<p>这场NOIP，至关重要。</p>
+<p>PS：这么重要你晚上还玩狼人杀…</p>
+<p>晚上去试机，机房配置不知道比我们学校机房高多少。酷睿i7，内存8GB，显卡貌似是GT770…</p>
+<p>这配置让我兴奋了半晚上…</p>
+<h1 id="Day1"><a href="#Day1" class="headerlink" title="Day1"></a>Day1</h1><p>早上按时起床，一切井然有序。</p>
+<p>除了班车号有点乱…</p>
+<p>压缩文件的解压密码为不忘初心。</p>
+<p>总览Day1试题，发现比去年简单不少。</p>
+<p>进入状态有点慢，用了十几分钟才决定要写第一题…</p>
+<p>看了题目给的两个样例，首先发现了一个错误的规律<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mi>a</mi><mi>x</mi><mo>(</mo><mi>a</mi><mo separator="true">,</mo><mi>b</mi><mo>)</mo><mo>∗</mo><mn>2</mn><mo>−</mo><mi>m</mi><mi>i</mi><mi>n</mi><mo>(</mo><mi>a</mi><mo separator="true">,</mo><mi>b</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">max(a,b)*2-min(a,b)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base textstyle uncramped"><span class="mord mathit">m</span><span class="mord mathit">a</span><span class="mord mathit">x</span><span class="mopen">(</span><span class="mord mathit">a</span><span class="mpunct">,</span><span class="mord mathit">b</span><span class="mclose">)</span><span class="mbin">∗</span><span class="mord mathrm">2</span><span class="mbin">−</span><span class="mord mathit">m</span><span class="mord mathit">i</span><span class="mord mathit">n</span><span class="mopen">(</span><span class="mord mathit">a</span><span class="mpunct">,</span><span class="mord mathit">b</span><span class="mclose">)</span></span></span></span>，令人兴奋地是居然过了全部的两个样例！</p>
+<p>以为RP不错，看还有时间，就写了对拍，放一边慢慢拍去了（其实对拍的数据生成器是错误的，我只生成了质数，暴力也有一点问题，这些都是之后才发现的）。</p>
+<p>发现T2是个大模拟，于是就扔了一边不管，先去写T3了。</p>
+<p>以为T3可以用Spfa来做DP，美滋滋能得到70分，就随便写了写。</p>
+<p>期间发现Day1的规律有误，随便猜了个<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mo>∗</mo><mi>b</mi><mo>−</mo><mi>a</mi><mo>−</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a*b-a-b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="base textstyle uncramped"><span class="mord mathit">a</span><span class="mbin">∗</span><span class="mord mathit">b</span><span class="mbin">−</span><span class="mord mathit">a</span><span class="mbin">−</span><span class="mord mathit">b</span></span></span></span>，发现恰好符合，又查出暴力有点小问题，心中庆幸写了对拍，并且拍出错误了。</p>
+<p>剩下的时间就一直重构T2，大约重构了3遍，重构成功了。</p>
+<p>这时时间就已经接近结束了，检查了几遍文件名和输入输出，便忐忑的走出了考场。</p>
+<p>回日照一中的班车上与liutao谈笑风生，发现T1的公式证明起来很麻烦，但猜规律却很简单。T2有好多好多特殊情况，幸亏大样例比较良心，基本都考虑到了。T3，就不说了，炸了。</p>
+<p>Day1期望得分100 + 100 + 0 = 200</p>
+<p>Day1实际得分100 + 100 + 10 = 210</p>
+<h1 id="Day1-5"><a href="#Day1-5" class="headerlink" title="Day1.5"></a>Day1.5</h1><p>下午liutao跟Cy大佬一起去找老师充电，我则跟Pb大佬在宿舍睡了一下午。</p>
+<p>晚上又玩了一晚上狼人杀…</p>
+<h1 id="Day2"><a href="#Day2" class="headerlink" title="Day2"></a>Day2</h1><p>这一天的解压密码为AlphaGo。</p>
+<p>Day2的题目就跟Day1不一样了，一看就比较正规…</p>
+<p>T1一眼看出搜索，于是就随便搜了搜，用30分钟左右写完。</p>
+<p>T2的题意理解了一会儿，瞬间想到一个贪心：枚举第一个加的点，然后类似于Prim的方法进行扩展。时间复杂度显然不对，也没想那么多。大样例居然过了！！！</p>
+<p>T3直接没考虑100%，采用了打分段程序的方法。</p>
+<p>前30%的数据，直接模拟。中间20%的数据，发现可以用vector做，然而居然忘记了vector怎么用了…</p>
+<p>还有30%的数据，x=1。</p>
+<p>考虑用树状数组维护每个树节点前面有多少个空位置，然后二分一个合法的位置即可，时间复杂度<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>n</mi><mi>l</mi><mi>o</mi><msup><mi>g</mi><mn>2</mn></msup><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">O(nlog^2n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.8141079999999999em;"></span><span class="strut bottom" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathit">n</span><span class="mord mathit" style="margin-right:0.01968em;">l</span><span class="mord mathit">o</span><span class="mord"><span class="mord mathit" style="margin-right:0.03588em;">g</span><span class="vlist"><span style="top:-0.363em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord mathrm">2</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mord mathit">n</span><span class="mclose">)</span></span></span></span>。</p>
+<p>Day2结束比较早，感觉没啥不对的，于是就欢快的玩起了扫雷……</p>
+<p>结束后，继续跟liutao谈笑风生，发现T2，T3貌似都有些大大小小的问题。</p>
+<p>Day2期望得分100 + 40 + 30 = 170</p>
+<p>Day2实际得分100 + 40 + 60 = 200</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>Noip2017期望得分100 + 100 + 0 + 100 + 40 + 30 = 370</p>
+<p>Noip2017实际得分100 + 100 + 10 + 100 + 40 + 60 = 410</p>
+<ul>
+<li><p>对动态规划的理解和应用还有待提高</p>
+</li>
+<li><p>对题目的敏感程度不高</p>
+</li>
+</ul>
+<p>下次比赛，继续努力啊！</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/游记/">游记</a>
+  </div>
+
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <SCRIPT language=javascript>
+function search(formname) {
+    formname.method = "get";
+    formname.action = "http://www.baidu.com/baidu";
+    document.search_form.word.value = document.search_form.word.value + " site:johnsonsky.github.io";
+    return true;
+}
+</SCRIPT>
+
+<div class="search">
+    <form name="search_form" target="_blank" onsubmit="search(this)">
+        <input type="search" name="word" results="0" placeholder="搜索" onblur="this.value=''">
+        <!-- <input type="submit" value="搜索"> -->
+    </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Daily-Life/">Daily Life</a><small>1</small></li>
+  
+    <li><a href="/categories/游记/">游记</a><small>1</small></li>
+  
+    <li><a href="/categories/解题报告/">解题报告</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Hash/">Hash</a><small>1</small></li>
+  
+    <li><a href="/tags/STL/">STL</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2017/11/28/Luogu P2087 解题报告/index/">Luogu P2087 解题报告</a>
+      </li>
+    
+      <li>
+        <a href="/2017/11/28/NOIP2017解题报告/index/">NOIP2017游记</a>
+      </li>
+    
+      <li>
+        <a href="/2017/11/27/Blog-Started/index/">Blog Started!</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  <div class="widget tag">   
+   <h3 class="title">Links</h3>   
+   <ul class="entry">   
+    <li><a href="https://www.cnblogs.com/Leonard-" title="Leonard_T">Leonard_T</a></li>   
+   </ul>   
+</div>  
+
+  <a href="http://xyz.freelogs.com/stats/j/johnsonsky/" target="_top"><img border="0" alt="free invisible web counter" src="http://xyz.freelogs.com/counter/index.php?u=johnsonsky&s=7seg" ALIGN="middle" HSPACE="4" VSPACE="2" align="center"></a><script src=http://xyz.freelogs.com/counter/script.php?u=johnsonsky></script>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2017 Johnson
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+</body>
+</html>
