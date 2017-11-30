@@ -1,0 +1,227 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>Luogu P1083 解题报告 | Johnson&#39;s Blog</title>
+  <meta name="author" content="Johnson">
+  
+  <meta name="description" content="Johnson&#39;s Blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Luogu P1083 解题报告"/>
+  <meta property="og:site_name" content="Johnson&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Johnson&#39;s Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+</head>
+
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Johnson&#39;s Blog</a></h1>
+  <h2><a href="/">Let life be beautiful like summer flowers and death like autumn leaves.</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/index">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/About">About Me</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2017-11-30T11:30:00.000Z"><a href="/2017/11/30/Luogu P1083 解题报告/index/">2017-11-30</a></time>
+      
+      
+  
+    <h1 class="title">Luogu P1083 解题报告</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a><a href="https://www.luogu.org/problemnew/show/1083" target="_blank" rel="noopener">题目</a>大意</h1><p>你需要维护一个序列，在做区间加的时候，时刻检查是否超过某一个值（每个下标的值不同），如果超过，输出当前操作编号。</p>
+<a id="more"></a>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>这个题的正解是二分+前缀和，这里说一下线段树的做法。</p>
+<p>线段树上每个节点记录的是当前区间中，已有的值减去最大的值的最小值。</p>
+<p>每次更新的时候检查一下是否小于0即可。</p>
+<p>注意，如果要用线段树做这道题，一定要注意常数因子对此题的影响！</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 1000010</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> i, z;</span><br><span class="line"><span class="keyword">int</span> lazy[N &lt;&lt; <span class="number">2</span>];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> l, r, num;</span><br><span class="line">&#125;tr[N &lt;&lt; <span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">get_num</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> now = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">char</span> ch = getchar();</span><br><span class="line">    <span class="keyword">while</span>(!<span class="built_in">isdigit</span>(ch)) ch = getchar();</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">isdigit</span>(ch))&#123;</span><br><span class="line">        now = (now &lt;&lt; <span class="number">1</span>) + (now &lt;&lt; <span class="number">3</span>) + ch - <span class="string">'0'</span>;</span><br><span class="line">        ch = getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> now;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">buildtree</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    tr[x].l = l, tr[x].r = r;</span><br><span class="line">    <span class="keyword">if</span>(l == r)&#123;</span><br><span class="line">        tr[x].num = get_num();</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">register</span> <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    buildtree(x &lt;&lt; <span class="number">1</span>, l, mid);</span><br><span class="line">    buildtree(x &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, mid + <span class="number">1</span>, r);</span><br><span class="line">    tr[x].num = min(tr[x &lt;&lt; <span class="number">1</span>].num, tr[x &lt;&lt; <span class="number">1</span> | <span class="number">1</span>].num);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">change</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(tr[x].l == l &amp;&amp; tr[x].r == r)&#123;</span><br><span class="line">        tr[x].num -= z;</span><br><span class="line">        <span class="keyword">if</span>(tr[x].num &lt; <span class="number">0</span>) <span class="built_in">printf</span>(<span class="string">"-1\n%d\n"</span>, i), <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">        lazy[x] += z;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(lazy[x])&#123;</span><br><span class="line">        tr[x &lt;&lt; <span class="number">1</span>].num -= lazy[x];</span><br><span class="line">        tr[x &lt;&lt; <span class="number">1</span> | <span class="number">1</span>].num -= lazy[x];</span><br><span class="line">        lazy[x &lt;&lt; <span class="number">1</span>] += lazy[x];</span><br><span class="line">        lazy[x &lt;&lt; <span class="number">1</span> | <span class="number">1</span>] += lazy[x];</span><br><span class="line">        lazy[x] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(tr[x &lt;&lt; <span class="number">1</span>].num &lt; <span class="number">0</span>) <span class="built_in">printf</span>(<span class="string">"-1\n%d\n"</span>, i), <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">if</span>(tr[x &lt;&lt; <span class="number">1</span> | <span class="number">1</span>].num &lt; <span class="number">0</span>) <span class="built_in">printf</span>(<span class="string">"-1\n%d\n"</span>, i), <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">register</span> <span class="keyword">int</span> mid = (tr[x].l + tr[x].r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(r &lt;= mid) change(x &lt;&lt; <span class="number">1</span>, l, r);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(l &gt; mid) change(x &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, l, r);</span><br><span class="line">    <span class="keyword">else</span> change(x &lt;&lt; <span class="number">1</span>, l, mid), change(x &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, mid + <span class="number">1</span>, r);</span><br><span class="line">    tr[x].num = min(tr[x &lt;&lt; <span class="number">1</span>].num, tr[x &lt;&lt; <span class="number">1</span> | <span class="number">1</span>].num);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">register</span> <span class="keyword">int</span> n, m, x, y;</span><br><span class="line">    n = get_num(), m = get_num();</span><br><span class="line">    buildtree(<span class="number">1</span>, <span class="number">1</span>, n);</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">1</span>; i &lt;= m; ++i)&#123;</span><br><span class="line">        z = get_num(), x = get_num(), y = get_num();</span><br><span class="line">        change(<span class="number">1</span>, x, y);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"0"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h1><ul>
+<li><p>注意常数因子对数据结构的影响，总结优化技巧</p>
+</li>
+<li><p>要考虑到“正难则反”的思想</p>
+</li>
+<li><p>调整好心态，仔细调试代码</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/解题报告/">解题报告</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/线段树/">线段树</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:johnsonsky.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Daily-Life/">Daily Life</a><small>1</small></li>
+  
+    <li><a href="/categories/游记/">游记</a><small>1</small></li>
+  
+    <li><a href="/categories/解题报告/">解题报告</a><small>4</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Hash/">Hash</a><small>1</small></li>
+  
+    <li><a href="/tags/Lca/">Lca</a><small>1</small></li>
+  
+    <li><a href="/tags/STL/">STL</a><small>1</small></li>
+  
+    <li><a href="/tags/差分/">差分</a><small>1</small></li>
+  
+    <li><a href="/tags/线段树/">线段树</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2017/11/30/Luogu P1083 解题报告/index/">Luogu P1083 解题报告</a>
+      </li>
+    
+      <li>
+        <a href="/2017/11/30/Luogu P2826 解题报告/index/">Luogu P2826 解题报告</a>
+      </li>
+    
+      <li>
+        <a href="/2017/11/29/Luogu P3128 解题报告/index/">Luogu P3128 解题报告</a>
+      </li>
+    
+      <li>
+        <a href="/2017/11/28/Luogu P2087 解题报告/index/">Luogu P2087 解题报告</a>
+      </li>
+    
+      <li>
+        <a href="/2017/11/28/NOIP2017解题报告/index/">NOIP2017游记</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  <div class="widget tag">   
+   <h3 class="title">Links</h3>   
+   <ul class="entry">   
+    <li><a href="https://www.cnblogs.com/Leonard-" title="Leonard_T">Leonard_T</a></li>
+    <li><a href="http://sshpark.com.cn" title="sshpark">sshpark</a></li>
+   </ul>   
+</div>  
+
+  <div class="widget tag">   
+   <h3 class="title">Count</h3>
+   <ul class="entry">   
+    <a href="http://xyz.freelogs.com/stats/j/johnsonsky/" target="_top"><img border="0" alt="free invisible web counter" src="http://xyz.freelogs.com/counter/index.php?u=johnsonsky&s=ocr" ALIGN="middle" HSPACE="4" VSPACE="2" align="center"></a><script src=http://xyz.freelogs.com/counter/script.php?u=johnsonsky></script>
+   </ul>   
+</div>  
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2017 Johnson
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/search.js"></script> 
+
+
+
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+</body>
+</html>
