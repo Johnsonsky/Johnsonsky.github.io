@@ -1,8 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta name="baidu-site-verification" content="MjmfTLumgX" />
-  <meta charset="utf-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
   <title>Lca | Johnson&#39;s Blog</title>
   <meta name="author" content="Johnson">
@@ -69,20 +68,11 @@
   </div>
 </div></div>
     <aside id="sidebar" class="alignright">
-  <SCRIPT language=javascript>
-function search(formname) {
-    formname.method = "get";
-    formname.action = "http://www.baidu.com/baidu";
-    document.search_form.word.value = document.search_form.word.value + " site:johnsonsky.github.io";
-    return true;
-}
-</SCRIPT>
-
-<div class="search">
-    <form name="search_form" target="_blank" onsubmit="search(this)">
-        <input type="search" name="word" results="0" placeholder="搜索" onblur="this.value=''">
-        <!-- <input type="submit" value="搜索"> -->
-    </form>
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:johnsonsky.github.io">
+  </form>
 </div>
 
   
@@ -161,10 +151,22 @@ function search(formname) {
 <div class="clearfix"></div></footer>
   <script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<script src="/js/gallery.js"></script>
+<script src="/js/search.js"></script> 
 
 
 
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 </body>
