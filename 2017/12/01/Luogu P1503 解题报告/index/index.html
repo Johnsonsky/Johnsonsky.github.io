@@ -1,0 +1,233 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>Luogu P1503 解题报告 | Johnson&#39;s Blog</title>
+  <meta name="author" content="Johnson">
+  
+  <meta name="description" content="Johnson&#39;s Blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Luogu P1503 解题报告"/>
+  <meta property="og:site_name" content="Johnson&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Johnson&#39;s Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+</head>
+
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Johnson&#39;s Blog</a></h1>
+  <h2><a href="/">Let life be beautiful like summer flowers and death like autumn leaves.</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/index">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/About">About Me</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2017-12-01T08:05:00.000Z"><a href="/2017/12/01/Luogu P1503 解题报告/index/">2017-12-01</a></time>
+      
+      
+  
+    <h1 class="title">Luogu P1503 解题报告</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a><a href="https://www.luogu.org/problemnew/show/1503" target="_blank" rel="noopener">题目</a>大意</h1><p>你需要维护一个序列，支持增加一个断点，恢复一个最近的断点，询问某个点所在的区间长度。</p>
+<a id="more"></a>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>考虑平衡树的做法。</p>
+<p>每增加一个断点，在平衡树中插入一个节点。用栈来记录增加断点的顺序，方便恢复。</p>
+<p>恢复时，就是删除平衡树中的一个节点。</p>
+<p>询问区间长度，那么就是找这个点的前驱和后继，输出他们之间的长度即可。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 50010</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m, x, tot, tp;</span><br><span class="line"><span class="keyword">int</span> st[N];</span><br><span class="line"><span class="keyword">char</span> opt;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> key, sz;</span><br><span class="line">    Node *ch[<span class="number">2</span>], *fa;</span><br><span class="line">&#125;null, *Null = &amp;null, *root, tr[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>&#123;</span><br><span class="line">    null.key = null.sz = <span class="number">0</span>;</span><br><span class="line">    null.ch[<span class="number">0</span>] = null.ch[<span class="number">1</span>] = null.fa = Null;</span><br><span class="line">    tot = <span class="number">0</span>, root = Null;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(Node *x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    x -&gt; sz = x -&gt; ch[<span class="number">0</span>] -&gt; sz + x -&gt; ch[<span class="number">1</span>] -&gt; sz;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">rotate</span><span class="params">(Node *x, <span class="keyword">bool</span> d)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Node *y = x -&gt; fa;</span><br><span class="line">    y -&gt; ch[!d] = x -&gt; ch[d];</span><br><span class="line">    <span class="keyword">if</span>(x -&gt; ch[d] != Null) x -&gt; ch[d] -&gt; fa = y;</span><br><span class="line">    x -&gt; fa = y -&gt; fa;</span><br><span class="line">    <span class="keyword">if</span>(y -&gt; fa != Null)&#123;</span><br><span class="line">        <span class="keyword">if</span>(y == y -&gt; fa -&gt; ch[<span class="number">0</span>]) y -&gt; fa -&gt; ch[<span class="number">0</span>] = x;</span><br><span class="line">        <span class="keyword">else</span> y -&gt; fa -&gt; ch[<span class="number">1</span>] = x;</span><br><span class="line">    &#125;</span><br><span class="line">    x -&gt; ch[d] = y;</span><br><span class="line">    y -&gt; fa = x;</span><br><span class="line">    update(x), update(y);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">splay</span><span class="params">(Node *x, Node *t)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Node *y;</span><br><span class="line">    <span class="keyword">while</span>(x -&gt; fa != t)&#123;</span><br><span class="line">        y = x -&gt; fa;</span><br><span class="line">        <span class="keyword">if</span>(y -&gt; fa == t)&#123;</span><br><span class="line">            <span class="keyword">if</span>(x == y -&gt; ch[<span class="number">0</span>]) rotate(x, <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">else</span> rotate(x, <span class="number">0</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(y == y -&gt; fa -&gt; ch[<span class="number">0</span>])&#123;</span><br><span class="line">                <span class="keyword">if</span>(x == y -&gt; ch[<span class="number">0</span>]) rotate(y, <span class="number">1</span>), rotate(x, <span class="number">1</span>);</span><br><span class="line">                <span class="keyword">else</span> rotate(x, <span class="number">0</span>), rotate(x, <span class="number">1</span>);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(x == y -&gt; ch[<span class="number">1</span>]) rotate(y, <span class="number">0</span>), rotate(x, <span class="number">0</span>);</span><br><span class="line">                <span class="keyword">else</span> rotate(x, <span class="number">1</span>), rotate(x, <span class="number">0</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(t == Null) root = x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">ins</span><span class="params">(<span class="keyword">int</span> key)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root == Null)&#123;</span><br><span class="line">        root = &amp;tr[++tot];</span><br><span class="line">        root -&gt; ch[<span class="number">0</span>] = root -&gt; ch[<span class="number">1</span>] = root -&gt; fa = Null;</span><br><span class="line">        root -&gt; sz = <span class="number">1</span>;</span><br><span class="line">        root -&gt; key = key;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    Node *x = root, *y;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        x -&gt; sz++;</span><br><span class="line">        <span class="keyword">if</span>(key &lt; x -&gt; key)&#123;</span><br><span class="line">            <span class="keyword">if</span>(x -&gt; ch[<span class="number">0</span>] != Null) x = x -&gt; ch[<span class="number">0</span>];</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                x -&gt; ch[<span class="number">0</span>] = &amp;tr[++tot];</span><br><span class="line">                y = x -&gt; ch[<span class="number">0</span>];</span><br><span class="line">                y -&gt; ch[<span class="number">0</span>] = y -&gt; ch[<span class="number">1</span>] = Null;</span><br><span class="line">                y -&gt; fa = x;</span><br><span class="line">                y -&gt; sz = <span class="number">1</span>;</span><br><span class="line">                y -&gt; key = key;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(x -&gt; ch[<span class="number">1</span>] != Null) x = x -&gt; ch[<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                x -&gt; ch[<span class="number">1</span>] = &amp;tr[++tot];</span><br><span class="line">                y = x -&gt; ch[<span class="number">1</span>];</span><br><span class="line">                y -&gt; ch[<span class="number">0</span>] = y -&gt; ch[<span class="number">1</span>] = Null;</span><br><span class="line">                y -&gt; fa = x;</span><br><span class="line">                y -&gt; sz = <span class="number">1</span>;</span><br><span class="line">                y -&gt; key = key;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    splay(y, Null);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> Node* <span class="title">find</span><span class="params">(<span class="keyword">int</span> key)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root == Null) <span class="keyword">return</span> Null;</span><br><span class="line">    Node *x = root, *y = Null;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(key == x -&gt; key)&#123;</span><br><span class="line">            y = x;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(key &lt; x -&gt; key)&#123;</span><br><span class="line">            <span class="keyword">if</span>(x -&gt; ch[<span class="number">0</span>] == Null) <span class="keyword">break</span>;</span><br><span class="line">            x = x -&gt; ch[<span class="number">0</span>];</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(x -&gt; ch[<span class="number">1</span>] == Null) <span class="keyword">break</span>;</span><br><span class="line">            x = x -&gt; ch[<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    splay(x, Null);</span><br><span class="line">    <span class="keyword">return</span> y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> Node* <span class="title">findmn</span><span class="params">(Node *x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Node *y = x -&gt; fa;</span><br><span class="line">    <span class="keyword">while</span>(x -&gt; ch[<span class="number">0</span>] != Null) x = x -&gt; ch[<span class="number">0</span>];</span><br><span class="line">    splay(x, y);</span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">del</span><span class="params">(<span class="keyword">int</span> key)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root == Null) <span class="keyword">return</span>;</span><br><span class="line">    Node *x = find(key), *y;</span><br><span class="line">    <span class="keyword">if</span>(x == Null) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">if</span>(x -&gt; ch[<span class="number">0</span>] == Null &amp;&amp; x -&gt; ch[<span class="number">1</span>] == Null)&#123;</span><br><span class="line">        tot = <span class="number">0</span>, root = Null;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(x -&gt; ch[<span class="number">0</span>] == Null)&#123;</span><br><span class="line">        root = x -&gt; ch[<span class="number">1</span>];</span><br><span class="line">        x -&gt; ch[<span class="number">1</span>] -&gt; fa = Null;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(x -&gt; ch[<span class="number">1</span>] == Null)&#123;</span><br><span class="line">        root = x -&gt; ch[<span class="number">0</span>];</span><br><span class="line">        x -&gt; ch[<span class="number">0</span>] -&gt; fa= Null;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    y = findmn(x -&gt; ch[<span class="number">1</span>]);</span><br><span class="line">    y -&gt; fa = Null;</span><br><span class="line">    y -&gt; ch[<span class="number">0</span>] = x -&gt; ch[<span class="number">0</span>];</span><br><span class="line">    x -&gt; ch[<span class="number">0</span>] -&gt; fa = y;</span><br><span class="line">    update(y);</span><br><span class="line">    root = y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> Node* <span class="title">pre</span><span class="params">(<span class="keyword">int</span> w)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Node *x = root, *y = Null;</span><br><span class="line">    <span class="keyword">while</span>(x != Null)&#123;</span><br><span class="line">        <span class="keyword">if</span>(w &gt; x -&gt; key)&#123;</span><br><span class="line">            y = x;</span><br><span class="line">            x = x -&gt; ch[<span class="number">1</span>];</span><br><span class="line">        &#125;<span class="keyword">else</span> x = x -&gt; ch[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> Node* <span class="title">sub</span><span class="params">(<span class="keyword">int</span> w)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Node *x = root, *y = Null;</span><br><span class="line">    <span class="keyword">while</span>(x != Null)&#123;</span><br><span class="line">        <span class="keyword">if</span>(w &lt; x -&gt; key)&#123;</span><br><span class="line">            y = x;</span><br><span class="line">            x = x -&gt; ch[<span class="number">0</span>];</span><br><span class="line">        &#125;<span class="keyword">else</span> x = x -&gt; ch[<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    init();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; opt;</span><br><span class="line">        <span class="keyword">if</span>(opt == <span class="string">'D'</span>)&#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; x;</span><br><span class="line">            ins(x);</span><br><span class="line">            st[++tp] = x;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(opt == <span class="string">'R'</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(tp == <span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">            del(st[tp--]);</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(opt == <span class="string">'Q'</span>)&#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; x;</span><br><span class="line">            <span class="keyword">if</span>(find(x) != Null) <span class="built_in">puts</span>(<span class="string">"0"</span>);</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">int</span> mn = pre(x) -&gt; key;</span><br><span class="line">                <span class="keyword">int</span> mx = sub(x) -&gt; key;</span><br><span class="line">                mx == <span class="number">0</span> ? mx = n + <span class="number">1</span> : <span class="literal">false</span>;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, mx - mn - <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h1><ul>
+<li><p>注意位运算的技巧和优先级问题</p>
+</li>
+<li><p>注意前驱和后继无法找到时，需要特判</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/解题报告/">解题报告</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/平衡树/">平衡树</a>, <a href="/tags/Splay/">Splay</a>, <a href="/tags/栈/">栈</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+    <div id="uyan_frame"></div>
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2150905"></script>
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:johnsonsky.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Daily-Life/">Daily Life</a><small>1</small></li>
+  
+    <li><a href="/categories/学习笔记/">学习笔记</a><small>1</small></li>
+  
+    <li><a href="/categories/游记/">游记</a><small>1</small></li>
+  
+    <li><a href="/categories/解题报告/">解题报告</a><small>5</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Hash/">Hash</a><small>1</small></li>
+  
+    <li><a href="/tags/Lca/">Lca</a><small>1</small></li>
+  
+    <li><a href="/tags/STL/">STL</a><small>1</small></li>
+  
+    <li><a href="/tags/Splay/">Splay</a><small>2</small></li>
+  
+    <li><a href="/tags/差分/">差分</a><small>1</small></li>
+  
+    <li><a href="/tags/平衡树/">平衡树</a><small>2</small></li>
+  
+    <li><a href="/tags/栈/">栈</a><small>1</small></li>
+  
+    <li><a href="/tags/线段树/">线段树</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2017/12/01/Splay 学习笔记/index/">Splay 学习笔记</a>
+      </li>
+    
+      <li>
+        <a href="/2017/12/01/Luogu P1503 解题报告/index/">Luogu P1503 解题报告</a>
+      </li>
+    
+      <li>
+        <a href="/2017/11/30/Luogu P1083 解题报告/index/">Luogu P1083 解题报告</a>
+      </li>
+    
+      <li>
+        <a href="/2017/11/30/Luogu P2826 解题报告/index/">Luogu P2826 解题报告</a>
+      </li>
+    
+      <li>
+        <a href="/2017/11/29/Luogu P3128 解题报告/index/">Luogu P3128 解题报告</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  <div class="widget tag">   
+   <h3 class="title">Links</h3>   
+   <ul class="entry">   
+    <li><a href="https://www.cnblogs.com/Leonard-" title="Leonard_T">Leonard_T</a></li>
+    <li><a href="http://sshpark.com.cn" title="sshpark">sshpark</a></li>
+    <li><a href="https://www.cnblogs.com/zhaoyz/" title="__AiR_H">__AiR_H</a></li>
+   </ul>   
+</div>  
+
+  <div class="widget tag">   
+   <h3 class="title">Count</h3>
+   <ul class="entry">   
+    <a href="http://xyz.freelogs.com/stats/j/johnsonsky/" target="_top"><img border="0" alt="free invisible web counter" src="http://xyz.freelogs.com/counter/index.php?u=johnsonsky&s=ocr" ALIGN="middle" HSPACE="4" VSPACE="2" align="center"></a><script src=http://xyz.freelogs.com/counter/script.php?u=johnsonsky></script>
+   </ul>   
+</div>  
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2017 Johnson
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/search.js"></script> 
+
+
+
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+</body>
+</html>
