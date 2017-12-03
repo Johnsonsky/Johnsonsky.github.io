@@ -3,7 +3,7 @@
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
-  <title>Blog Started! | Johnson&#39;s Blog</title>
+  <title>Luogu P1311 解题报告 | Johnson&#39;s Blog</title>
   <meta name="author" content="Johnson">
   
   <meta name="description" content="Johnson&#39;s Blog">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="Blog Started!"/>
+  <meta property="og:title" content="Luogu P1311 解题报告"/>
   <meta property="og:site_name" content="Johnson&#39;s Blog"/>
 
   
@@ -55,19 +55,28 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2017-11-27T13:00:00.000Z"><a href="/2017/11/27/Blog Started!/index/">2017-11-27</a></time>
+        <time datetime="2017-12-03T12:05:00.000Z"><a href="/2017/12/03/Luogu P1311 解题报告/index/">2017-12-03</a></time>
       
       
   
-    <h1 class="title">Blog Started!</h1>
+    <h1 class="title">Luogu P1311 解题报告</h1>
   
 
     </header>
     <div class="entry">
       
-        <h1 id="写在博客前面"><a href="#写在博客前面" class="headerlink" title="写在博客前面"></a>写在博客前面</h1><p>新博客开坑啦，一定要坚持写下去哦！</p>
-<p>欢迎交换友链，一起努力吧！</p>
-<p><strong>Let life be beautiful like summer flowers and death like autumn leaves!</strong></p>
+        <h1 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a><a href="https://www.luogu.org/problemnew/show/1311" target="_blank" rel="noopener">题目</a>大意</h1><p>找出有多少对颜色相同的点对（闭区间）之间的钱数最小值不超过p元。</p>
+<a id="more"></a>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>对每一个颜色做一遍前缀和。</p>
+<p>对每一个合法的位置，计算前面有几个未被计入答案的颜色，后面有几个未被计入答案的颜色，再单独计算合法位置上颜色的归属。</p>
+<p>注意代码的细节问题。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, k, mxp, lst[<span class="number">55</span>];</span><br><span class="line"><span class="keyword">int</span> c[<span class="number">200010</span>], p[<span class="number">200010</span>];</span><br><span class="line"><span class="keyword">int</span> num[<span class="number">200010</span>][<span class="number">55</span>];</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d %d %d"</span>, &amp;n, &amp;k, &amp;mxp);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;c[i], &amp;p[i]);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; k; ++j)&#123;</span><br><span class="line">            num[i][j] = num[i - <span class="number">1</span>][j];</span><br><span class="line">        &#125;</span><br><span class="line">        num[i][c[i]]++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)&#123;</span><br><span class="line">        <span class="keyword">if</span>(p[i] &lt;= mxp)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; k; ++j)&#123;</span><br><span class="line">                ans += (num[n][j] - num[i][j]) * (num[i - <span class="number">1</span>][j] - lst[j]);</span><br><span class="line">                <span class="keyword">if</span>(j == c[i]) ans += num[n][j] - lst[j] - <span class="number">1</span>;</span><br><span class="line">                lst[j] = num[i][j];</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h1><ul>
+<li><p>注意前缀和的区间开闭问题</p>
+</li>
+<li><p>注意每个点对应的颜色的归属，可以先拿出来，然后单独算</p>
+</li>
+</ul>
 
       
     </div>
@@ -76,10 +85,15 @@
         
   
   <div class="categories">
-    <a href="/categories/Daily-Life/">Daily Life</a>
+    <a href="/categories/解题报告/">解题报告</a>
   </div>
 
         
+  
+  <div class="tags">
+    <a href="/tags/前缀和/">前缀和</a>
+  </div>
+
       
       <div class="clearfix"></div>
     </footer>
