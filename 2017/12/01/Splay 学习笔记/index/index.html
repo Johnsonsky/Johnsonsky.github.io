@@ -76,8 +76,7 @@
 <h2 id="Update"><a href="#Update" class="headerlink" title="Update"></a>Update</h2><p>Update函数用于收集并更新节点的信息，即当前点的大小等于两个儿子的大小的和，再加上自身的权重。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(Node *x)</span></span>&#123;</span><br><span class="line">    x -&gt; sz = x -&gt; ch[<span class="number">0</span>] -&gt; sz + x -&gt; ch[<span class="number">1</span>] -&gt; sz + cnt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="Rotate"><a href="#Rotate" class="headerlink" title="Rotate"></a>Rotate</h2><p>Rotate函数是整个Splay算法的基础。</p>
-<center><img src="/Img/Splay 学习笔记/rotate1.png" alt="Rotate1"></center>
-
+<p><br><center><img src="/Img/Splay 学习笔记/rotate1.png" alt="Rotate1"></center></p>
 <p>Rotate函数遵循以下几个步骤（以左旋为例）：</p>
 <ul>
 <li><p>判断当前的Rotate是左旋还是右旋。<br>这个操作在调用rotate函数的时候就已经完成了，0表示左旋，1表示右旋，用d表示。</p>
@@ -105,21 +104,18 @@
 <li><p>若是，那么只需要旋转一次即可。<br>如果当前节点是其父亲节点的左儿子，那么右旋当前节点，否则左旋当前节点。<br>对应下图的操作。</p>
 </li>
 </ul>
-<center><img src="/Img/Splay 学习笔记/rotate2.png" alt="Rotate2"></center>
-
+<p><br><center><img src="/Img/Splay 学习笔记/rotate2.png" alt="Rotate2"></center></p>
 <ul>
 <li><p>若否，看当前节点、父亲节点与父亲的父亲节点之间的父子关系。<br>如果当前节点是其父亲节点的左儿子，那么右旋当前节点，否则左旋当前节点。同时适用于当前节点的旋转和父亲节点的旋转。</p>
 </li>
 <li><p>若父子关系为“一”字，那么当前节点与父亲节点的旋转方向相同。<br>旋转时，应先旋转父亲，在旋转当前节点。</p>
 </li>
 </ul>
-<center><img src="/Img/Splay 学习笔记/rotate3.png" alt="Rotate3"></center>
-
+<p><br><center><img src="/Img/Splay 学习笔记/rotate3.png" alt="Rotate3"></center></p>
 <ul>
 <li>若父子关系为“之”字，那么当前节点与父亲节点的旋转方向相反。<br>旋转时，应先将当前结点旋转到父亲，在旋转当前节点。</li>
 </ul>
-<center><img src="/Img/Splay 学习笔记/rotate4.png" alt="Rotate4"></center>
-
+<p><br><center><img src="/Img/Splay 学习笔记/rotate4.png" alt="Rotate4"></center></p>
 <ul>
 <li>最后检查是否需要更新根节点信息</li>
 </ul>
@@ -215,7 +211,7 @@
   
     <li><a href="/categories/Daily-Life/">Daily Life</a><small>1</small></li>
   
-    <li><a href="/categories/学习笔记/">学习笔记</a><small>1</small></li>
+    <li><a href="/categories/学习笔记/">学习笔记</a><small>2</small></li>
   
     <li><a href="/categories/游记/">游记</a><small>1</small></li>
   
@@ -252,6 +248,8 @@
   
     <li><a href="/tags/线段树/">线段树</a><small>2</small></li>
   
+    <li><a href="/tags/网络流/">网络流</a><small>1</small></li>
+  
     <li><a href="/tags/计算几何/">计算几何</a><small>1</small></li>
   
   </ul>
@@ -262,6 +260,10 @@
 <div class="widget tag">
   <h3 class="title">最新文章</h3>
   <ul class="entry">
+    
+      <li>
+        <a href="/2017/12/04/网络流 学习笔记/index/">网络流 学习笔记</a>
+      </li>
     
       <li>
         <a href="/2017/12/04/Luogu P3842 解题报告/index/">Luogu P3842 解题报告</a>
@@ -297,10 +299,6 @@
     
       <li>
         <a href="/2017/11/29/Luogu P3128 解题报告/index/">Luogu P3128 解题报告</a>
-      </li>
-    
-      <li>
-        <a href="/2017/11/28/Luogu P2087 解题报告/index/">Luogu P2087 解题报告</a>
       </li>
     
   </ul>
