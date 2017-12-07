@@ -69,7 +69,7 @@
 <p>基于<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathit">n</span><span class="mclose">)</span></span></span></span>的空间复杂度，它能在<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">O(logn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.01968em;">l</span><span class="mord mathit">o</span><span class="mord mathit" style="margin-right:0.03588em;">g</span><span class="mord mathit">n</span><span class="mclose">)</span></span></span></span>的时间复杂度内完成插入、查找、删除等操作。</p>
 <a id="more"></a>
 <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>为了便于理解，不将Splay封装在Struct中，而是采用函数的方法，进行相关的操作。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义树的节点数量上界</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 100010</span></span><br><span class="line"><span class="comment">// 定义平衡树的节点</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> key, sz, cnt;</span><br><span class="line">    Node *ch[<span class="number">2</span>], *fa;</span><br><span class="line">&#125;null, *Null = &amp;null;</span><br><span class="line"><span class="comment">// 定义平衡树</span></span><br><span class="line"><span class="keyword">int</span> tot;</span><br><span class="line">Node *root, *tr[N];</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义树的节点数量上界</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 100010</span></span><br><span class="line"><span class="comment">// 定义平衡树的节点</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> key, sz, cnt;</span><br><span class="line">    Node *ch[<span class="number">2</span>], *fa;</span><br><span class="line">&#125;null, *Null = &amp;null;</span><br><span class="line"><span class="comment">// 定义平衡树</span></span><br><span class="line"><span class="keyword">int</span> tot;</span><br><span class="line">Node *root, tr[N];</span><br></pre></td></tr></table></figure>
 <h1 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h1><p>以下图片均来自于Wiki。</p>
 <h2 id="Init"><a href="#Init" class="headerlink" title="Init"></a>Init</h2><p>init函数用于初始化整个算法，包括初始化Null指针，初始化树根和大小等。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">// 初始化Null指针</span></span><br><span class="line">    null.key = null.sz = null.cnt = <span class="number">0</span>;</span><br><span class="line">    null.ch[<span class="number">0</span>] = null.ch[<span class="number">1</span>] = null.fa = Null;</span><br><span class="line">    <span class="comment">// 初始化平衡树</span></span><br><span class="line">    tot = <span class="number">0</span>;</span><br><span class="line">    root = Null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -212,9 +212,9 @@
   
     <li><a href="/categories/Daily-Life/">Daily Life</a><small>1</small></li>
   
-    <li><a href="/categories/学习笔记/">学习笔记</a><small>1</small></li>
+    <li><a href="/categories/学习笔记/">学习笔记</a><small>2</small></li>
   
-    <li><a href="/categories/比赛记录/">比赛记录</a><small>2</small></li>
+    <li><a href="/categories/比赛记录/">比赛记录</a><small>3</small></li>
   
     <li><a href="/categories/游记/">游记</a><small>1</small></li>
   
@@ -231,6 +231,8 @@
   
     <li><a href="/tags/Hash/">Hash</a><small>1</small></li>
   
+    <li><a href="/tags/KMP/">KMP</a><small>1</small></li>
+  
     <li><a href="/tags/Lca/">Lca</a><small>2</small></li>
   
     <li><a href="/tags/STL/">STL</a><small>1</small></li>
@@ -241,7 +243,7 @@
   
     <li><a href="/tags/前缀和/">前缀和</a><small>1</small></li>
   
-    <li><a href="/tags/动态规划/">动态规划</a><small>3</small></li>
+    <li><a href="/tags/动态规划/">动态规划</a><small>4</small></li>
   
     <li><a href="/tags/博弈论/">博弈论</a><small>1</small></li>
   
@@ -249,19 +251,21 @@
   
     <li><a href="/tags/平衡树/">平衡树</a><small>2</small></li>
   
-    <li><a href="/tags/并查集/">并查集</a><small>1</small></li>
+    <li><a href="/tags/并查集/">并查集</a><small>3</small></li>
   
     <li><a href="/tags/数学/">数学</a><small>1</small></li>
   
     <li><a href="/tags/栈/">栈</a><small>1</small></li>
   
-    <li><a href="/tags/模拟/">模拟</a><small>3</small></li>
+    <li><a href="/tags/模拟/">模拟</a><small>4</small></li>
   
     <li><a href="/tags/矩阵乘法/">矩阵乘法</a><small>1</small></li>
   
     <li><a href="/tags/线段树/">线段树</a><small>2</small></li>
   
     <li><a href="/tags/计算几何/">计算几何</a><small>1</small></li>
+  
+    <li><a href="/tags/贪心/">贪心</a><small>1</small></li>
   
   </ul>
 </div>
@@ -271,6 +275,14 @@
 <div class="widget tag">
   <h3 class="title">最新文章</h3>
   <ul class="entry">
+    
+      <li>
+        <a href="/2017/12/07/葫芦娃们的小比赛3 比赛记录/index/">葫芦娃们的小比赛3 比赛记录</a>
+      </li>
+    
+      <li>
+        <a href="/2017/12/06/KMP 学习笔记/index/">KMP 学习笔记</a>
+      </li>
     
       <li>
         <a href="/2017/12/05/葫芦娃们的小比赛2 比赛记录/index/">葫芦娃们的小比赛2 比赛记录</a>
@@ -302,14 +314,6 @@
     
       <li>
         <a href="/2017/12/01/Luogu P2785 解题报告/index/">Luogu P2785 解题报告</a>
-      </li>
-    
-      <li>
-        <a href="/2017/12/01/Luogu P1503 解题报告/index/">Luogu P1503 解题报告</a>
-      </li>
-    
-      <li>
-        <a href="/2017/12/01/Splay 学习笔记/index/">Splay 学习笔记</a>
       </li>
     
   </ul>
