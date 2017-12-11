@@ -1,0 +1,303 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>Luogu P1074 解题报告 | Johnson&#39;s Blog</title>
+  <meta name="author" content="Johnson">
+  
+  <meta name="description" content="Johnson&#39;s Blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Luogu P1074 解题报告"/>
+  <meta property="og:site_name" content="Johnson&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Johnson&#39;s Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+</head>
+
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Johnson&#39;s Blog</a></h1>
+  <h2><a href="/">Let life be beautiful like summer flowers and death like autumn leaves.</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/index">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/About">About Me</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2017-12-11T10:30:00.000Z"><a href="/2017/12/11/Luogu P1074 解题报告/index/">2017-12-11</a></time>
+      
+      
+  
+    <h1 class="title">Luogu P1074 解题报告</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a><a href="https://www.luogu.org/problemnew/show/1074" target="_blank" rel="noopener">题目</a>大意</h1><p>给你一个数独，请你填上一定的数字，使得得分最大。</p>
+<a id="more"></a>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>一道简单的搜索题，理论上直接搜索就可以，但是常数问题嘛……</p>
+<p>(╯‵□′)╯︵┻━┻</p>
+<p>一些技巧：</p>
+<ul>
+<li><p>用位运算代替数组运算</p>
+</li>
+<li><p>通过打表优化计算位置和分数</p>
+</li>
+<li><p>通过位运算技巧来实现一定运算，如集合运算</p>
+</li>
+<li><p>考虑一些剪枝（如果当前分数+期望分数小于已有答案分数，那么直接返回；预先计算必定能填的位置；每次选择一个能填的数尽量小的位置填……）</p>
+</li>
+</ul>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> x first</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> y second</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> Uint;</span><br><span class="line"><span class="keyword">int</span> ans, num, now;</span><br><span class="line">Uint a[<span class="number">10</span>][<span class="number">10</span>];</span><br><span class="line">Uint h[<span class="number">10</span>], l[<span class="number">10</span>], g[<span class="number">10</span>];</span><br><span class="line">Uint s[<span class="number">10</span>][<span class="number">10</span>] = &#123;&#123;&#125;,</span><br><span class="line">    &#123;<span class="number">0</span>, <span class="number">6</span>, <span class="number">6</span>, <span class="number">6</span>, <span class="number">6</span>, <span class="number">6</span>, <span class="number">6</span>, <span class="number">6</span>, <span class="number">6</span>, <span class="number">6</span>&#125;,</span><br><span class="line">    &#123;<span class="number">0</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">6</span>&#125;,</span><br><span class="line">    &#123;<span class="number">0</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">8</span>, <span class="number">8</span>, <span class="number">8</span>, <span class="number">8</span>, <span class="number">7</span>, <span class="number">6</span>&#125;,</span><br><span class="line">    &#123;<span class="number">0</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">9</span>, <span class="number">9</span>, <span class="number">8</span>, <span class="number">7</span>, <span class="number">6</span>&#125;,</span><br><span class="line">    &#123;<span class="number">0</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">9</span>, <span class="number">8</span>, <span class="number">7</span>, <span class="number">6</span>&#125;,</span><br><span class="line">    &#123;<span class="number">0</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">9</span>, <span class="number">9</span>, <span class="number">8</span>, <span class="number">7</span>, <span class="number">6</span>&#125;,</span><br><span class="line">    &#123;<span class="number">0</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">8</span>, <span class="number">8</span>, <span class="number">8</span>, <span class="number">8</span>, <span class="number">7</span>, <span class="number">6</span>&#125;,</span><br><span class="line">    &#123;<span class="number">0</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">6</span>&#125;,</span><br><span class="line">    &#123;<span class="number">0</span>, <span class="number">6</span>, <span class="number">6</span>, <span class="number">6</span>, <span class="number">6</span>, <span class="number">6</span>, <span class="number">6</span>, <span class="number">6</span>, <span class="number">6</span>, <span class="number">6</span>&#125;</span><br><span class="line">&#125;;</span><br><span class="line">Uint w[<span class="number">10</span>][<span class="number">10</span>] = &#123;&#123;&#125;,</span><br><span class="line">    &#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>&#125;,</span><br><span class="line">    &#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>&#125;,</span><br><span class="line">    &#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>&#125;,</span><br><span class="line">    &#123;<span class="number">0</span>, <span class="number">4</span>, <span class="number">4</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">6</span>, <span class="number">6</span>&#125;,</span><br><span class="line">    &#123;<span class="number">0</span>, <span class="number">4</span>, <span class="number">4</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">6</span>, <span class="number">6</span>&#125;,</span><br><span class="line">    &#123;<span class="number">0</span>, <span class="number">4</span>, <span class="number">4</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">6</span>, <span class="number">6</span>&#125;,</span><br><span class="line">    &#123;<span class="number">0</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">8</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">9</span>, <span class="number">9</span>&#125;,</span><br><span class="line">    &#123;<span class="number">0</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">8</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">9</span>, <span class="number">9</span>&#125;,</span><br><span class="line">    &#123;<span class="number">0</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">8</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">9</span>, <span class="number">9</span>&#125;</span><br><span class="line">&#125;;</span><br><span class="line">pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;tmp;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> Uint <span class="title">calc</span><span class="params">(Uint x)</span></span>&#123;</span><br><span class="line">    Uint tmp = x - ((x &gt;&gt; <span class="number">1</span>) &amp; <span class="number">033333333333</span>) - ((x &gt;&gt; <span class="number">2</span>) &amp; <span class="number">011111111111</span>);</span><br><span class="line">    <span class="keyword">return</span> ((tmp + (tmp &gt;&gt; <span class="number">3</span>)) &amp; <span class="number">030707070707</span>) % <span class="number">63</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">inline</span> pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; check()&#123;</span><br><span class="line">    <span class="keyword">register</span> <span class="keyword">int</span> i, j, nowx = <span class="number">-1</span>, nowy = <span class="number">-1</span>, now = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">1</span>; i &lt;= <span class="number">9</span>; ++i)&#123;</span><br><span class="line">        <span class="keyword">for</span>(j = <span class="number">1</span>; j &lt;= <span class="number">9</span>; ++j)&#123;</span><br><span class="line">            <span class="keyword">if</span>(a[i][j] == <span class="number">0</span> &amp;&amp; calc(h[i] | l[j] | g[w[i][j]]) &gt; now)&#123;</span><br><span class="line">                now = calc(h[i] | l[j] | g[w[i][j]]);</span><br><span class="line">                nowx = i, nowy = j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> make_pair(nowx, nowy);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(num == <span class="number">81</span>)&#123;</span><br><span class="line">        ans = max(ans, now);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>((<span class="number">81</span> - num) * <span class="number">90</span> + now &lt; ans) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">register</span> <span class="keyword">int</span> v = h[x] | l[y] | g[w[x][y]];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> k = <span class="number">9</span>; k &gt;= <span class="number">1</span>; --k)&#123;</span><br><span class="line">        <span class="keyword">if</span>((v | (<span class="number">1</span> &lt;&lt; k)) != v)&#123;</span><br><span class="line">            a[x][y] = k, h[x] |= (<span class="number">1</span> &lt;&lt; k), l[y] |= (<span class="number">1</span> &lt;&lt; k), g[w[x][y]] |= (<span class="number">1</span> &lt;&lt; k);</span><br><span class="line">            tmp = check(), ++num, now += k * s[x][y];</span><br><span class="line">            dfs(tmp.x, tmp.y);</span><br><span class="line">            --num, now -= k * s[x][y];</span><br><span class="line">            a[x][y] = <span class="number">0</span>, h[x] ^= (<span class="number">1</span> &lt;&lt; k), l[y] ^= (<span class="number">1</span> &lt;&lt; k), g[w[x][y]] ^= (<span class="number">1</span> &lt;&lt; k);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">register</span> <span class="keyword">int</span> i, j, k, x;</span><br><span class="line">    <span class="keyword">register</span> <span class="keyword">bool</span> flag;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">1</span>; i &lt;= <span class="number">9</span>; ++i)&#123;</span><br><span class="line">        <span class="keyword">for</span>(j = <span class="number">1</span>; j &lt;= <span class="number">9</span>; ++j)&#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;x);</span><br><span class="line">            a[i][j] = x;</span><br><span class="line">            <span class="keyword">if</span>(x != <span class="number">0</span>) h[i] |= (<span class="number">1</span> &lt;&lt; x), l[j] |= (<span class="number">1</span> &lt;&lt; x), g[w[i][j]] |= (<span class="number">1</span> &lt;&lt; x);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        flag = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">for</span>(i = <span class="number">1</span>; i &lt;= <span class="number">9</span>; ++i)&#123;</span><br><span class="line">            <span class="keyword">for</span>(j = <span class="number">1</span>; j &lt;= <span class="number">9</span>; ++j)&#123;</span><br><span class="line">                <span class="keyword">if</span>(a[i][j] == <span class="number">0</span>)&#123;</span><br><span class="line">                    <span class="keyword">if</span>(calc(h[i] | l[j] | g[w[i][j]]) == <span class="number">8</span>)&#123;</span><br><span class="line">                        <span class="keyword">for</span>(k = <span class="number">1</span>; k &lt;= <span class="number">9</span>; ++k)&#123;</span><br><span class="line">                            <span class="keyword">if</span>(calc(h[i] | l[j] | g[w[i][j]] | (<span class="number">1</span> &lt;&lt; k)) == <span class="number">9</span>)&#123;</span><br><span class="line">                                a[i][j] = k;</span><br><span class="line">                                h[i] |= (<span class="number">1</span> &lt;&lt; k), l[j] |= (<span class="number">1</span> &lt;&lt; k), g[w[i][j]] |= (<span class="number">1</span> &lt;&lt; k);</span><br><span class="line">                                flag = <span class="literal">true</span>;</span><br><span class="line">                                <span class="keyword">goto</span> nxt;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        nxt:;</span><br><span class="line">        <span class="keyword">if</span>(flag == <span class="literal">false</span>) <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">1</span>; i &lt;= <span class="number">9</span>; ++i)&#123;</span><br><span class="line">        <span class="keyword">for</span>(j = <span class="number">1</span>; j &lt;= <span class="number">9</span>; ++j)&#123;</span><br><span class="line">            <span class="keyword">if</span>(a[i][j] != <span class="number">0</span>) now += s[i][j] * a[i][j], ++num;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    ans = now;</span><br><span class="line">    tmp = check();</span><br><span class="line">    dfs(tmp.x, tmp.y);</span><br><span class="line">    <span class="keyword">if</span>(ans == now) <span class="built_in">puts</span>(<span class="string">"-1"</span>);</span><br><span class="line">    <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h1><ul>
+<li>注意常数因子对算法的影响</li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/解题报告/">解题报告</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/位运算/">位运算</a>, <a href="/tags/搜索/">搜索</a>, <a href="/tags/卡常数/">卡常数</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+    <div id="uyan_frame"></div>
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2150905"></script>
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:johnsonsky.github.io">
+  </form>
+</div>
+
+  <div class="widget tag">   
+   <h3 class="title">Announcement</h3>   
+   <ul class="entry">
+    <li>请“加载不安全的脚本”以使用“友言”评论功能。</li>
+    <li>博客建设规划：暂无</li>
+   </ul>   
+</div>  
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Daily-Life/">Daily Life</a><small>1</small></li>
+  
+    <li><a href="/categories/学习笔记/">学习笔记</a><small>2</small></li>
+  
+    <li><a href="/categories/比赛记录/">比赛记录</a><small>3</small></li>
+  
+    <li><a href="/categories/游记/">游记</a><small>1</small></li>
+  
+    <li><a href="/categories/解题报告/">解题报告</a><small>15</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Hash/">Hash</a><small>1</small></li>
+  
+    <li><a href="/tags/KMP/">KMP</a><small>1</small></li>
+  
+    <li><a href="/tags/Lca/">Lca</a><small>2</small></li>
+  
+    <li><a href="/tags/STL/">STL</a><small>1</small></li>
+  
+    <li><a href="/tags/Splay/">Splay</a><small>2</small></li>
+  
+    <li><a href="/tags/二分/">二分</a><small>1</small></li>
+  
+    <li><a href="/tags/位运算/">位运算</a><small>1</small></li>
+  
+    <li><a href="/tags/分块/">分块</a><small>2</small></li>
+  
+    <li><a href="/tags/前缀和/">前缀和</a><small>1</small></li>
+  
+    <li><a href="/tags/动态规划/">动态规划</a><small>5</small></li>
+  
+    <li><a href="/tags/博弈论/">博弈论</a><small>1</small></li>
+  
+    <li><a href="/tags/卡常数/">卡常数</a><small>2</small></li>
+  
+    <li><a href="/tags/差分/">差分</a><small>1</small></li>
+  
+    <li><a href="/tags/平衡树/">平衡树</a><small>2</small></li>
+  
+    <li><a href="/tags/并查集/">并查集</a><small>3</small></li>
+  
+    <li><a href="/tags/拓扑排序/">拓扑排序</a><small>1</small></li>
+  
+    <li><a href="/tags/搜索/">搜索</a><small>1</small></li>
+  
+    <li><a href="/tags/数学/">数学</a><small>1</small></li>
+  
+    <li><a href="/tags/栈/">栈</a><small>1</small></li>
+  
+    <li><a href="/tags/模拟/">模拟</a><small>4</small></li>
+  
+    <li><a href="/tags/矩阵乘法/">矩阵乘法</a><small>1</small></li>
+  
+    <li><a href="/tags/线段树/">线段树</a><small>2</small></li>
+  
+    <li><a href="/tags/莫队算法/">莫队算法</a><small>2</small></li>
+  
+    <li><a href="/tags/计算几何/">计算几何</a><small>1</small></li>
+  
+    <li><a href="/tags/贪心/">贪心</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2017/12/11/Luogu P1074 解题报告/index/">Luogu P1074 解题报告</a>
+      </li>
+    
+      <li>
+        <a href="/2017/12/11/Luogu P3183 解题报告/index/">Luogu P3183 解题报告</a>
+      </li>
+    
+      <li>
+        <a href="/2017/12/09/Luogu P2709 解题报告/index/">Luogu P2709 解题报告</a>
+      </li>
+    
+      <li>
+        <a href="/2017/12/08/Luogu P1972 解题报告/index/">Luogu P1972 解题报告</a>
+      </li>
+    
+      <li>
+        <a href="/2017/12/07/葫芦娃们的小比赛3 比赛记录/index/">葫芦娃们的小比赛3 比赛记录</a>
+      </li>
+    
+      <li>
+        <a href="/2017/12/06/KMP 学习笔记/index/">KMP 学习笔记</a>
+      </li>
+    
+      <li>
+        <a href="/2017/12/05/葫芦娃们的小比赛2 比赛记录/index/">葫芦娃们的小比赛2 比赛记录</a>
+      </li>
+    
+      <li>
+        <a href="/2017/12/05/Luogu P2555 解题报告/index/">Luogu P2555 解题报告</a>
+      </li>
+    
+      <li>
+        <a href="/2017/12/05/Luogu P1197 解题报告/index/">Luogu P1197 解题报告</a>
+      </li>
+    
+      <li>
+        <a href="/2017/12/04/葫芦娃们的小比赛1 比赛记录/index/">葫芦娃们的小比赛1 比赛记录</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  <div class="widget tag">   
+   <h3 class="title">Links</h3>   
+   <ul class="entry">
+    <li><a href="https://www.cnblogs.com/Leonard-" title="Leonard_T">Leonard_T</a></li>
+    <li><a href="http://sshpark.com.cn" title="sshpark">sshpark</a></li>
+    <li><a href="https://www.cnblogs.com/zhaoyz/" title="__AiR_H">__AiR_H</a></li>
+   </ul>   
+</div>  
+
+  <div class="widget tag">   
+   <h3 class="title">Count</h3>
+   <ul class="entry">   
+    <a href="http://xyz.freelogs.com/stats/j/johnsonsky/" target="_top"><img border="0" alt="free invisible web counter" src="http://xyz.freelogs.com/counter/index.php?u=johnsonsky&s=ocr" ALIGN="middle" HSPACE="4" VSPACE="2" align="center"></a><script src=http://xyz.freelogs.com/counter/script.php?u=johnsonsky></script>
+   </ul>   
+</div>  
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2017 Johnson
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/search.js"></script> 
+
+
+
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+</body>
+</html>

@@ -72,14 +72,14 @@
 <h2 id="Init"><a href="#Init" class="headerlink" title="Init"></a>Init</h2><p>init函数用于初始化整个算法，包括初始化Null指针，初始化树根和大小等。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">// 初始化Null指针</span></span><br><span class="line">    null.key = null.sz = null.cnt = <span class="number">0</span>;</span><br><span class="line">    null.ch[<span class="number">0</span>] = null.ch[<span class="number">1</span>] = null.fa = Null;</span><br><span class="line">    <span class="comment">// 初始化平衡树</span></span><br><span class="line">    tot = <span class="number">0</span>;</span><br><span class="line">    root = Null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="Update"><a href="#Update" class="headerlink" title="Update"></a>Update</h2><p>Update函数用于收集并更新节点的信息，即当前点的大小等于两个儿子的大小的和，再加上自身的权重。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(Node *x)</span></span>&#123;</span><br><span class="line">    x -&gt; sz = x -&gt; ch[<span class="number">0</span>] -&gt; sz + x -&gt; ch[<span class="number">1</span>] -&gt; sz + cnt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(Node *x)</span></span>&#123;</span><br><span class="line">    x -&gt; sz = x -&gt; ch[<span class="number">0</span>] -&gt; sz + x -&gt; ch[<span class="number">1</span>] -&gt; sz + x -&gt; cnt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="Rotate"><a href="#Rotate" class="headerlink" title="Rotate"></a>Rotate</h2><p>Rotate函数是整个Splay算法的基础。</p>
 <p><br><center><img src="/Img/Splay 学习笔记/rotate1.png" alt="Rotate1"></center></p>
 <p>Rotate函数遵循以下几个步骤（以左旋为例）：</p>
 <ul>
 <li><p>判断当前的Rotate是左旋还是右旋。<br>这个操作在调用rotate函数的时候就已经完成了，0表示左旋，1表示右旋，用d表示。</p>
 </li>
-<li><p>将父亲的与旋转方向相反的儿子，指向当前的与旋转方向相同的儿子，并更新父子关系。<br>结合上图，就是将P点的右儿子指针指向Q点的左儿子指针。</p>
+<li><p>将父亲的与旋转方向相反的儿子，指向当前的与旋转方向相同的儿子，并更新父子关系。<br>结合上图，就是将P点的右儿子指针指向Q点的左儿子。</p>
 </li>
 <li><p>更新当前节点的关系。<br>将当前节点的父亲指向其父亲的父亲，然后更新当前节点的父亲的儿子指针。</p>
 </li>
@@ -216,7 +216,7 @@
   
     <li><a href="/categories/游记/">游记</a><small>1</small></li>
   
-    <li><a href="/categories/解题报告/">解题报告</a><small>13</small></li>
+    <li><a href="/categories/解题报告/">解题报告</a><small>15</small></li>
   
   </ul>
 </div>
@@ -239,19 +239,27 @@
   
     <li><a href="/tags/二分/">二分</a><small>1</small></li>
   
+    <li><a href="/tags/位运算/">位运算</a><small>1</small></li>
+  
     <li><a href="/tags/分块/">分块</a><small>2</small></li>
   
     <li><a href="/tags/前缀和/">前缀和</a><small>1</small></li>
   
-    <li><a href="/tags/动态规划/">动态规划</a><small>4</small></li>
+    <li><a href="/tags/动态规划/">动态规划</a><small>5</small></li>
   
     <li><a href="/tags/博弈论/">博弈论</a><small>1</small></li>
+  
+    <li><a href="/tags/卡常数/">卡常数</a><small>2</small></li>
   
     <li><a href="/tags/差分/">差分</a><small>1</small></li>
   
     <li><a href="/tags/平衡树/">平衡树</a><small>2</small></li>
   
     <li><a href="/tags/并查集/">并查集</a><small>3</small></li>
+  
+    <li><a href="/tags/拓扑排序/">拓扑排序</a><small>1</small></li>
+  
+    <li><a href="/tags/搜索/">搜索</a><small>1</small></li>
   
     <li><a href="/tags/数学/">数学</a><small>1</small></li>
   
@@ -277,6 +285,14 @@
 <div class="widget tag">
   <h3 class="title">最新文章</h3>
   <ul class="entry">
+    
+      <li>
+        <a href="/2017/12/11/Luogu P1074 解题报告/index/">Luogu P1074 解题报告</a>
+      </li>
+    
+      <li>
+        <a href="/2017/12/11/Luogu P3183 解题报告/index/">Luogu P3183 解题报告</a>
+      </li>
     
       <li>
         <a href="/2017/12/09/Luogu P2709 解题报告/index/">Luogu P2709 解题报告</a>
@@ -308,14 +324,6 @@
     
       <li>
         <a href="/2017/12/04/葫芦娃们的小比赛1 比赛记录/index/">葫芦娃们的小比赛1 比赛记录</a>
-      </li>
-    
-      <li>
-        <a href="/2017/12/04/Luogu P3842 解题报告/index/">Luogu P3842 解题报告</a>
-      </li>
-    
-      <li>
-        <a href="/2017/12/03/Luogu P1311 解题报告/index/">Luogu P1311 解题报告</a>
       </li>
     
   </ul>
