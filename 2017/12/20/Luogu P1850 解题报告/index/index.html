@@ -70,7 +70,18 @@
 <p>通俗一点，期望就是你所有可能得到的权值乘以其概率。</p>
 <p>考虑这个题目的DP做法。</p>
 <p>用<code>f[i][j][0/1]</code>表示前i个位置，用了j次交换(含第i个位置)，第i个位置是交换还是不交换。</p>
-<p>那么就会有四个转移方程：</p>
+<p>考虑到一条路径仅涉及到四个点，那么就会有几种情况：</p>
+<ul>
+<li><p>前一个点没有交换，当前点没有交换</p>
+</li>
+<li><p>前一个点交换(成功/失败)，当前点没有交换</p>
+</li>
+<li><p>前一个点没有交换，当前点交换(成功/失败)</p>
+</li>
+<li><p>前一个点交换(成功/失败)，当前点交换(成功/失败)</p>
+</li>
+</ul>
+<p>由此，就会有四个转移方程：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">f[i][j][<span class="number">0</span>] = min(f[i][j][<span class="number">0</span>], f[i - <span class="number">1</span>][j][<span class="number">0</span>] + dis[c[i - <span class="number">1</span>]][c[i]]);</span><br><span class="line">f[i][j][<span class="number">0</span>] = min(f[i][j][<span class="number">0</span>], f[i - <span class="number">1</span>][j][<span class="number">1</span>] + k[i - <span class="number">1</span>] * dis[d[i - <span class="number">1</span>]][c[i]] + (<span class="number">1</span> - k[i - <span class="number">1</span>]) * dis[c[i - <span class="number">1</span>]][c[i]]);</span><br><span class="line">f[i][j][<span class="number">1</span>] = min(f[i][j][<span class="number">1</span>], f[i - <span class="number">1</span>][j - <span class="number">1</span>][<span class="number">0</span>] + k[i] * dis[c[i - <span class="number">1</span>]][d[i]] + (<span class="number">1</span> - k[i]) * dis[c[i - <span class="number">1</span>]][c[i]]);</span><br><span class="line">f[i][j][<span class="number">1</span>] = min(f[i][j][<span class="number">1</span>], f[i - <span class="number">1</span>][j - <span class="number">1</span>][<span class="number">1</span>] + (k[i - <span class="number">1</span>] * k[i]) * dis[d[i - <span class="number">1</span>]][d[i]] + ((<span class="number">1</span> - k[i - <span class="number">1</span>]) * k[i]) * dis[c[i - <span class="number">1</span>]][d[i]] + ((<span class="number">1</span> - k[i]) * k[i - <span class="number">1</span>]) * dis[d[i - <span class="number">1</span>]][c[i]] + ((<span class="number">1</span> - k[i]) * (<span class="number">1</span> - k[i - <span class="number">1</span>])) * dis[c[i - <span class="number">1</span>]][c[i]]);</span><br></pre></td></tr></table></figure>
 <p>注意一下：在转移的时候要考虑到一些转移的合法性，忽略不合法的转移。</p>
 <p>最后不要忘记将所有情况取一个最小值。</p>
@@ -157,7 +168,7 @@
   
     <li><a href="/categories/游记/">游记</a><small>1</small></li>
   
-    <li><a href="/categories/解题报告/">解题报告</a><small>18</small></li>
+    <li><a href="/categories/解题报告/">解题报告</a><small>19</small></li>
   
   </ul>
 </div>
@@ -167,6 +178,8 @@
 <div class="widget tag">
   <h3 class="title">标签</h3>
   <ul class="entry">
+  
+    <li><a href="/tags/Dfs/">Dfs</a><small>1</small></li>
   
     <li><a href="/tags/Dijkstra/">Dijkstra</a><small>1</small></li>
   
@@ -248,6 +261,10 @@
   <ul class="entry">
     
       <li>
+        <a href="/2017/12/21/Luogu P1131 解题报告/index/">Luogu P1131 解题报告</a>
+      </li>
+    
+      <li>
         <a href="/2017/12/20/Luogu P1850 解题报告/index/">Luogu P1850 解题报告</a>
       </li>
     
@@ -281,10 +298,6 @@
     
       <li>
         <a href="/2017/12/09/Luogu P2709 解题报告/index/">Luogu P2709 解题报告</a>
-      </li>
-    
-      <li>
-        <a href="/2017/12/08/Luogu P1972 解题报告/index/">Luogu P1972 解题报告</a>
       </li>
     
   </ul>
