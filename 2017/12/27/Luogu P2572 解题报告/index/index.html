@@ -1,0 +1,355 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  <link rel="shortcut icon" href="/Img/favicon.ico" type="image/x-icon" />
+  
+  <title>Luogu P2572 解题报告 | Johnson&#39;s Blog</title>
+  <meta name="author" content="Johnson">
+  
+  <meta name="description" content="Johnson&#39;s Blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Luogu P2572 解题报告"/>
+  <meta property="og:site_name" content="Johnson&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Johnson&#39;s Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+</head>
+
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Johnson&#39;s Blog</a></h1>
+  <h2><a href="/">The future is already here — it&#39;s just not very evenly distributed.</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/About">About Me</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2017-12-27T01:15:00.000Z"><a href="/2017/12/27/Luogu P2572 解题报告/index/">2017-12-27</a></time>
+      
+      
+  
+    <h1 class="title">Luogu P2572 解题报告</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a><a href="https://www.luogu.org/problemnew/show/2572" target="_blank" rel="noopener">题目</a>大意</h1><p>一个01序列，维护以下几种操作：</p>
+<ul>
+<li>0 a b：将[a,b]覆盖为0</li>
+<li>1 a b：将[a,b]覆盖为1</li>
+<li>2 a b：将[a,b]中的01反转</li>
+<li>3 a b：求[a,b]中1的个数</li>
+<li>4 a b：求[a,b]中连续的最长的1的个数</li>
+</ul>
+<a id="more"></a>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>线段树(╯‵□′)╯︵┻━┻！</p>
+<p>记录每个节点的左端、右端、1的数量、连续的最长的0或1的数量，左右端连续0或1的数量。</p>
+<p>注意一下Update和Pushdown的顺序。</p>
+<p>在维护4操作时，需要注意区间是否包含的问题。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 100010</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m, opt, x, y;</span><br><span class="line"><span class="keyword">bool</span> tmp;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> l, r, w, ans0, ans1, num0, num1, lnum0, rnum0, lnum1, rnum1;</span><br><span class="line">    <span class="keyword">bool</span> now;</span><br><span class="line">&#125;tr[N &lt;&lt; <span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">get_num</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> now = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">bool</span> sign = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">char</span> ch = getchar();</span><br><span class="line">    <span class="keyword">while</span>(!<span class="built_in">isdigit</span>(ch))&#123;</span><br><span class="line">        <span class="keyword">if</span>(ch == <span class="string">'-'</span>) sign = <span class="literal">true</span>;</span><br><span class="line">        ch = getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">isdigit</span>(ch))&#123;</span><br><span class="line">        now = (now &lt;&lt; <span class="number">1</span>) + (now &lt;&lt; <span class="number">3</span>) + ch - <span class="string">'0'</span>;</span><br><span class="line">        ch = getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> now;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">pushdown1</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">register</span> <span class="keyword">int</span> lson = (x &lt;&lt; <span class="number">1</span>), rson = (x &lt;&lt; <span class="number">1</span> | <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span>(tr[x].now == <span class="number">1</span>)&#123;</span><br><span class="line">        tr[lson].now ^= <span class="number">1</span>, tr[rson].now ^= <span class="number">1</span>;</span><br><span class="line">        tr[lson].w != <span class="number">-1</span> ? tr[lson].w ^= <span class="number">1</span> : <span class="literal">false</span>;</span><br><span class="line">        swap(tr[lson].ans0, tr[lson].ans1), swap(tr[lson].num0, tr[lson].num1);</span><br><span class="line">        swap(tr[lson].lnum0, tr[lson].lnum1), swap(tr[lson].rnum0, tr[lson].rnum1);</span><br><span class="line">        tr[rson].w != <span class="number">-1</span> ? tr[rson].w ^= <span class="number">1</span> : <span class="literal">false</span>;</span><br><span class="line">        swap(tr[rson].ans0, tr[rson].ans1), swap(tr[rson].num0, tr[rson].num1);</span><br><span class="line">        swap(tr[rson].lnum0, tr[rson].lnum1), swap(tr[rson].rnum0, tr[rson].rnum1);</span><br><span class="line">        tr[x].now = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">pushdown2</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">register</span> <span class="keyword">int</span> lson = (x &lt;&lt; <span class="number">1</span>), rson = (x &lt;&lt; <span class="number">1</span> | <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span>(tr[x].w != <span class="number">-1</span>)&#123;</span><br><span class="line">        tr[lson].now = <span class="number">0</span>, tr[lson].w = tr[x].w;</span><br><span class="line">        tr[lson].ans0 = tr[lson].lnum0 = tr[lson].rnum0 = tr[lson].num0 = (tr[x].w ^ <span class="number">1</span>) * (tr[lson].r - tr[lson].l + <span class="number">1</span>);</span><br><span class="line">        tr[lson].ans1 = tr[lson].lnum1 = tr[lson].rnum1 = tr[lson].num1 = tr[x].w * (tr[lson].r - tr[lson].l + <span class="number">1</span>);</span><br><span class="line">        tr[rson].now = <span class="number">0</span>, tr[rson].w = tr[x].w;</span><br><span class="line">        tr[rson].ans0 = tr[rson].lnum0 = tr[rson].rnum0 = tr[rson].num0 = (tr[x].w ^ <span class="number">1</span>) * (tr[rson].r - tr[rson].l + <span class="number">1</span>);</span><br><span class="line">        tr[rson].ans1 = tr[rson].lnum1 = tr[rson].rnum1 = tr[rson].num1 = tr[x].w * (tr[rson].r - tr[rson].l + <span class="number">1</span>);</span><br><span class="line">        tr[x].now = <span class="number">0</span>, tr[x].w = <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">register</span> <span class="keyword">int</span> lson = (x &lt;&lt; <span class="number">1</span>), rson = (x &lt;&lt; <span class="number">1</span> | <span class="number">1</span>);</span><br><span class="line">    tr[x].ans0 = tr[lson].ans0 + tr[rson].ans0;</span><br><span class="line">    tr[x].ans1 = tr[lson].ans1 + tr[rson].ans1;</span><br><span class="line">    tr[x].lnum0 = tr[lson].lnum0 + (tr[lson].num0 == tr[lson].r - tr[lson].l + <span class="number">1</span> ? tr[rson].lnum0 : <span class="number">0</span>);</span><br><span class="line">    tr[x].lnum1 = tr[lson].lnum1 + (tr[lson].num1 == tr[lson].r - tr[lson].l + <span class="number">1</span> ? tr[rson].lnum1 : <span class="number">0</span>);</span><br><span class="line">    tr[x].rnum0 = tr[rson].rnum0 + (tr[rson].num0 == tr[rson].r - tr[rson].l + <span class="number">1</span> ? tr[lson].rnum0 : <span class="number">0</span>);</span><br><span class="line">    tr[x].rnum1 = tr[rson].rnum1 + (tr[rson].num1 == tr[rson].r - tr[rson].l + <span class="number">1</span> ? tr[lson].rnum1 : <span class="number">0</span>);</span><br><span class="line">    tr[x].num0 = max(max(tr[lson].num0, tr[rson].num0), tr[lson].rnum0 + tr[rson].lnum0);</span><br><span class="line">    tr[x].num1 = max(max(tr[lson].num1, tr[rson].num1), tr[lson].rnum1 + tr[rson].lnum1);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">buildtree</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    tr[x].l = l, tr[x].r = r, tr[x].w = <span class="number">-1</span>, tr[x].now = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(l == r)&#123;</span><br><span class="line">        tmp = get_num();</span><br><span class="line">        tr[x].ans0 = tr[x].lnum0 = tr[x].rnum0 = tr[x].num0 = tmp ^ <span class="number">1</span>;</span><br><span class="line">        tr[x].ans1 = tr[x].lnum1 = tr[x].rnum1 = tr[x].num1 = tmp;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">register</span> <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    buildtree(x &lt;&lt; <span class="number">1</span>, l, mid);</span><br><span class="line">    buildtree(x &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, mid + <span class="number">1</span>, r);</span><br><span class="line">    update(x);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">change_seg</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(tr[x].l == l &amp;&amp; tr[x].r == r)&#123;</span><br><span class="line">        tr[x].now = <span class="number">0</span>, tr[x].w = opt;</span><br><span class="line">        tr[x].ans0 = tr[x].lnum0 = tr[x].rnum0 = tr[x].num0 = (opt ^ <span class="number">1</span>) * (tr[x].r - tr[x].l + <span class="number">1</span>);</span><br><span class="line">        tr[x].ans1 = tr[x].lnum1 = tr[x].rnum1 = tr[x].num1 = opt * (tr[x].r - tr[x].l + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    pushdown2(x), pushdown1(x);</span><br><span class="line">    <span class="keyword">register</span> <span class="keyword">int</span> mid = (tr[x].l + tr[x].r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(r &lt;= mid) change_seg(x &lt;&lt; <span class="number">1</span>, l, r);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(l &gt; mid) change_seg(x &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, l, r);</span><br><span class="line">    <span class="keyword">else</span> change_seg(x &lt;&lt; <span class="number">1</span>, l, mid), change_seg(x &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, mid + <span class="number">1</span>, r);</span><br><span class="line">    update(x);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">change_side</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(tr[x].l == l &amp;&amp; tr[x].r == r)&#123;</span><br><span class="line">        tr[x].now ^= <span class="number">1</span>;</span><br><span class="line">        tr[x].w != <span class="number">-1</span> ? tr[x].w ^= <span class="number">1</span> : <span class="literal">false</span>;</span><br><span class="line">        swap(tr[x].ans0, tr[x].ans1), swap(tr[x].num0, tr[x].num1);</span><br><span class="line">        swap(tr[x].lnum0, tr[x].lnum1), swap(tr[x].rnum0, tr[x].rnum1);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    pushdown2(x), pushdown1(x);</span><br><span class="line">    <span class="keyword">register</span> <span class="keyword">int</span> mid = (tr[x].l + tr[x].r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(r &lt;= mid) change_side(x &lt;&lt; <span class="number">1</span>, l, r);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(l &gt; mid) change_side(x &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, l, r);</span><br><span class="line">    <span class="keyword">else</span> change_side(x &lt;&lt; <span class="number">1</span>, l, mid), change_side(x &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, mid + <span class="number">1</span>, r);</span><br><span class="line">    update(x);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">query_ans</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(tr[x].l == l &amp;&amp; tr[x].r == r) <span class="keyword">return</span> tr[x].ans1;</span><br><span class="line">    pushdown2(x), pushdown1(x);</span><br><span class="line">    <span class="keyword">register</span> <span class="keyword">int</span> mid = (tr[x].l + tr[x].r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(r &lt;= mid) <span class="keyword">return</span> query_ans(x &lt;&lt; <span class="number">1</span>, l, r);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(l &gt; mid) <span class="keyword">return</span> query_ans(x &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, l, r);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> query_ans(x &lt;&lt; <span class="number">1</span>, l, mid) + query_ans(x &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, mid + <span class="number">1</span>, r);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> Node <span class="title">query_num</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(tr[x].l == l &amp;&amp; tr[x].r == r) <span class="keyword">return</span> tr[x];</span><br><span class="line">    pushdown2(x), pushdown1(x);</span><br><span class="line">    <span class="keyword">register</span> <span class="keyword">int</span> mid = (tr[x].l + tr[x].r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(r &lt;= mid) <span class="keyword">return</span> query_num(x &lt;&lt; <span class="number">1</span>, l, r);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(l &gt; mid) <span class="keyword">return</span> query_num(x &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, l, r);</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        Node tmp, tl = query_num(x &lt;&lt; <span class="number">1</span>, l, mid), tr = query_num(x &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, mid + <span class="number">1</span>, r);</span><br><span class="line">        <span class="keyword">if</span>(tl.num1 == tl.r - tl.l + <span class="number">1</span>) tmp.lnum1 = tl.num1 + tr.lnum1;</span><br><span class="line">        <span class="keyword">else</span> tmp.lnum1 = tl.lnum1;</span><br><span class="line">        <span class="keyword">if</span>(tr.num1 == tr.r - tr.l + <span class="number">1</span>) tmp.rnum1 = tr.num1 + tl.rnum1;</span><br><span class="line">        <span class="keyword">else</span> tmp.rnum1 = tr.rnum1;</span><br><span class="line">        tmp.num1 = max(max(tl.num1, tr.num1), tl.rnum1 + tr.lnum1);</span><br><span class="line">        <span class="keyword">return</span> tmp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    n = get_num(), m = get_num();</span><br><span class="line">    buildtree(<span class="number">1</span>, <span class="number">1</span>, n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i)&#123;</span><br><span class="line">        opt = get_num(), x = get_num(), y = get_num();</span><br><span class="line">        ++x, ++y;</span><br><span class="line">        <span class="keyword">if</span>(opt == <span class="number">0</span> || opt == <span class="number">1</span>) change_seg(<span class="number">1</span>, x, y);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(opt == <span class="number">2</span>) change_side(<span class="number">1</span>, x, y);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(opt == <span class="number">3</span>) <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, query_ans(<span class="number">1</span>, x, y));</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(opt == <span class="number">4</span>) <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, query_num(<span class="number">1</span>, x, y).num1);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h1><ul>
+<li><p>注意区间合并问题</p>
+</li>
+<li><p>注意标记下传或覆盖问题</p>
+</li>
+<li><p>注意答案区间与线段树区间的关系</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/解题报告/">解题报告</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/线段树/">线段树</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMjUwMS85MDYy">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:johnsonsky.github.io">
+  </form>
+</div>
+
+  <div class="widget tag">   
+   <h3 class="title">Announcement</h3>   
+   <ul class="entry">
+    <li>博客建设规划：</li>
+    <li>使用新的搜索方式</li>
+   </ul>   
+</div>  
+
+  <div class="widget tag">   
+   <h3 class="title">Music</h3>   
+   <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=270 height=86 src="//music.163.com/outchain/player?type=2&id=515404505&auto=0&height=66"></iframe>
+</div>  
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Daily-Life/">Daily Life</a><small>1</small></li>
+  
+    <li><a href="/categories/学习笔记/">学习笔记</a><small>3</small></li>
+  
+    <li><a href="/categories/比赛记录/">比赛记录</a><small>6</small></li>
+  
+    <li><a href="/categories/游记/">游记</a><small>1</small></li>
+  
+    <li><a href="/categories/解题报告/">解题报告</a><small>20</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Dfs/">Dfs</a><small>1</small></li>
+  
+    <li><a href="/tags/Dijkstra/">Dijkstra</a><small>1</small></li>
+  
+    <li><a href="/tags/Floyd/">Floyd</a><small>1</small></li>
+  
+    <li><a href="/tags/Hash/">Hash</a><small>2</small></li>
+  
+    <li><a href="/tags/KMP/">KMP</a><small>1</small></li>
+  
+    <li><a href="/tags/Lca/">Lca</a><small>2</small></li>
+  
+    <li><a href="/tags/STL/">STL</a><small>2</small></li>
+  
+    <li><a href="/tags/Spfa/">Spfa</a><small>1</small></li>
+  
+    <li><a href="/tags/Splay/">Splay</a><small>2</small></li>
+  
+    <li><a href="/tags/Trie/">Trie</a><small>1</small></li>
+  
+    <li><a href="/tags/二分/">二分</a><small>2</small></li>
+  
+    <li><a href="/tags/位运算/">位运算</a><small>1</small></li>
+  
+    <li><a href="/tags/分块/">分块</a><small>2</small></li>
+  
+    <li><a href="/tags/前缀和/">前缀和</a><small>1</small></li>
+  
+    <li><a href="/tags/动态规划/">动态规划</a><small>6</small></li>
+  
+    <li><a href="/tags/博弈论/">博弈论</a><small>1</small></li>
+  
+    <li><a href="/tags/卡常数/">卡常数</a><small>2</small></li>
+  
+    <li><a href="/tags/堆/">堆</a><small>2</small></li>
+  
+    <li><a href="/tags/字符串/">字符串</a><small>1</small></li>
+  
+    <li><a href="/tags/差分/">差分</a><small>1</small></li>
+  
+    <li><a href="/tags/平衡树/">平衡树</a><small>2</small></li>
+  
+    <li><a href="/tags/并查集/">并查集</a><small>3</small></li>
+  
+    <li><a href="/tags/拓扑排序/">拓扑排序</a><small>1</small></li>
+  
+    <li><a href="/tags/搜索/">搜索</a><small>1</small></li>
+  
+    <li><a href="/tags/数学/">数学</a><small>4</small></li>
+  
+    <li><a href="/tags/期望/">期望</a><small>1</small></li>
+  
+    <li><a href="/tags/枚举/">枚举</a><small>2</small></li>
+  
+    <li><a href="/tags/栈/">栈</a><small>1</small></li>
+  
+    <li><a href="/tags/树状数组/">树状数组</a><small>2</small></li>
+  
+    <li><a href="/tags/模拟/">模拟</a><small>7</small></li>
+  
+    <li><a href="/tags/矩阵乘法/">矩阵乘法</a><small>1</small></li>
+  
+    <li><a href="/tags/线段树/">线段树</a><small>3</small></li>
+  
+    <li><a href="/tags/莫队算法/">莫队算法</a><small>2</small></li>
+  
+    <li><a href="/tags/计算几何/">计算几何</a><small>1</small></li>
+  
+    <li><a href="/tags/贪心/">贪心</a><small>4</small></li>
+  
+    <li><a href="/tags/链表/">链表</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2017/12/27/Luogu P2572 解题报告/index/">Luogu P2572 解题报告</a>
+      </li>
+    
+      <li>
+        <a href="/2017/12/23/CodePlus2017-12月赛 Div.2/index/">CodePlus2017-12月赛 Div.2</a>
+      </li>
+    
+      <li>
+        <a href="/2017/12/21/Luogu P1131 解题报告/index/">Luogu P1131 解题报告</a>
+      </li>
+    
+      <li>
+        <a href="/2017/12/20/Luogu P1850 解题报告/index/">Luogu P1850 解题报告</a>
+      </li>
+    
+      <li>
+        <a href="/2017/12/19/Codeforces Round-452 (Div. 2)/index/">Codeforces Round-452 (Div. 2)</a>
+      </li>
+    
+      <li>
+        <a href="/2017/12/17/Codeforces Round-451 (Div. 2)/index/">Codeforces Round-451 (Div. 2)</a>
+      </li>
+    
+      <li>
+        <a href="/2017/12/14/Luogu P1608 解题报告/index/">Luogu P1608 解题报告</a>
+      </li>
+    
+      <li>
+        <a href="/2017/12/13/Luogu P2387 解题报告/index/">Luogu P2387 解题报告</a>
+      </li>
+    
+      <li>
+        <a href="/2017/12/12/Trie树 学习笔记/index/">Trie树 学习笔记</a>
+      </li>
+    
+      <li>
+        <a href="/2017/12/11/Luogu P1074 解题报告/index/">Luogu P1074 解题报告</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  <div class="widget tag">   
+   <h3 class="title">Links</h3>   
+   <ul class="entry">
+    <li><a href="https://www.cnblogs.com/Leonard-" title="Leonard_T">Leonard_T</a></li>
+    <li><a href="http://sshpark.com.cn" title="sshpark">sshpark</a></li>
+    <li><a href="https://www.cnblogs.com/zhaoyz/" title="__AiR_H">__AiR_H</a></li>
+    <li><a href="https://ksyx.cf" title="酷暑一夏1">酷暑一夏1</a></li>
+   </ul>   
+</div>  
+
+  <div class="widget tag">   
+   <h3 class="title">Count</h3>
+   <ul class="entry">   
+    <a href="http://xyz.freelogs.com/stats/j/johnsonsky/" target="_top"><img border="0" alt="free invisible web counter" src="http://xyz.freelogs.com/counter/index.php?u=johnsonsky&s=ocr" ALIGN="middle" HSPACE="4" VSPACE="2" align="center"></a><script src=http://xyz.freelogs.com/counter/script.php?u=johnsonsky></script>
+   </ul>   
+</div>  
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2017 Johnson
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/search.js"></script> 
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+</body>
+</html>
