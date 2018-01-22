@@ -1,0 +1,345 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  <link rel="shortcut icon" href="/Img/favicon.ico" type="image/x-icon" />
+  
+  <title>Luogu P2234 解题报告 | Johnson&#39;s Blog</title>
+  <meta name="author" content="Johnson">
+  
+  <meta name="description" content="Johnson&#39;s Blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Luogu P2234 解题报告"/>
+  <meta property="og:site_name" content="Johnson&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Johnson&#39;s Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+</head>
+
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Johnson&#39;s Blog</a></h1>
+  <h2><a href="/">The future is already here — it&#39;s just not very evenly distributed.</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/About">About Me</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-01-12T09:00:00.000Z"><a href="/2018/01/12/Luogu P2234 解题报告/index/">2018-01-12</a></time>
+      
+      
+  
+    <h1 class="title">Luogu P2234 解题报告</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a><a href="https://www.luogu.org/problemnew/show/2234" target="_blank" rel="noopener">题目</a>大意</h1><p>求$a<em>1$到$a</em>{i-1}$中与$a_i$绝对值最小的值的和。</p>
+<a id="more"></a>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>维护平衡树，找前驱后继计算即可。</p>
+<p>维护一棵平衡树就行，记录一下当前存的是人还是宠物，分情况讨论一下。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 40010</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;</span><br><span class="line">LL n, w, x, y, root, cnt, pre, nxt, ans;</span><br><span class="line">LL ch[N][<span class="number">2</span>], num[N], val[N], sz[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> LL <span class="title">get_num</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    LL now = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">bool</span> sign = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">char</span> ch = getchar();</span><br><span class="line">    <span class="keyword">while</span>(!<span class="built_in">isdigit</span>(ch))&#123;</span><br><span class="line">        <span class="keyword">if</span>(ch == <span class="string">'-'</span>) sign = <span class="literal">true</span>;</span><br><span class="line">        ch = getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">isdigit</span>(ch))&#123;</span><br><span class="line">        now = (now &lt;&lt; <span class="number">1</span>) + (now &lt;&lt; <span class="number">3</span>) + ch - <span class="string">'0'</span>;</span><br><span class="line">        ch = getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (sign == <span class="literal">false</span> ? now : -now);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(LL x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    sz[x] = sz[ch[x][<span class="number">0</span>]] + sz[ch[x][<span class="number">1</span>]] + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> LL <span class="title">create</span><span class="params">(LL x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    val[++cnt] = x, num[cnt] = rand(), sz[cnt] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> cnt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> LL <span class="title">merge</span><span class="params">(LL x, LL y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!x || !y) <span class="keyword">return</span> x + y;</span><br><span class="line">    <span class="keyword">if</span>(num[x] &lt; num[y])&#123;</span><br><span class="line">        ch[x][<span class="number">1</span>] = merge(ch[x][<span class="number">1</span>], y);</span><br><span class="line">        update(x);</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        ch[y][<span class="number">0</span>] = merge(x, ch[y][<span class="number">0</span>]);</span><br><span class="line">        update(y);</span><br><span class="line">        <span class="keyword">return</span> y;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">split</span><span class="params">(LL now, LL k, LL &amp;x, LL &amp;y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!now) x = y = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(val[now] &lt;= k) x = now, split(ch[now][<span class="number">1</span>], k, ch[now][<span class="number">1</span>], y);</span><br><span class="line">        <span class="keyword">else</span> y = now, split(ch[now][<span class="number">0</span>], k, x, ch[now][<span class="number">0</span>]);</span><br><span class="line">        update(now);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> LL <span class="title">kth</span><span class="params">(LL now, LL k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(k &lt;= sz[ch[now][<span class="number">0</span>]]) now = ch[now][<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(k == sz[ch[now][<span class="number">0</span>]] + <span class="number">1</span>) <span class="keyword">return</span> now;</span><br><span class="line">        <span class="keyword">else</span> k -= sz[ch[now][<span class="number">0</span>]] + <span class="number">1</span>, now = ch[now][<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    srand(<span class="number">20010905</span>);</span><br><span class="line">    n = get_num();</span><br><span class="line">    w = get_num(), ans = w;</span><br><span class="line">    split(root, w, x, y);</span><br><span class="line">    root = merge(merge(x, create(w)), y);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> LL i = <span class="number">2</span>; i &lt;= n; ++i)&#123;</span><br><span class="line">        w = get_num();</span><br><span class="line">        split(root, w, x, y);</span><br><span class="line">        pre = sz[x] != <span class="number">0</span> ? <span class="built_in">abs</span>(val[kth(x, sz[x])] - w) : <span class="number">9999999999999999l</span>l;</span><br><span class="line">        root = merge(x, y);</span><br><span class="line">        split(root, w - <span class="number">1</span>, x, y);</span><br><span class="line">        nxt = sz[y] != <span class="number">0</span> ? <span class="built_in">abs</span>(val[kth(y, <span class="number">1</span>)] - w) : <span class="number">9999999999999999l</span>l;</span><br><span class="line">        root = merge(x, y);</span><br><span class="line">        ans += min(pre, nxt);</span><br><span class="line">        split(root, w, x, y);</span><br><span class="line">        root = merge(merge(x, create(w)), y);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h1><ul>
+<li>注意前驱、后继不存在的情况</li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/解题报告/">解题报告</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/Treap/">Treap</a>, <a href="/tags/平衡树/">平衡树</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMjUwMS85MDYy">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:johnsonsky.github.io">
+  </form>
+</div>
+
+  <div class="widget tag">   
+   <h3 class="title">Announcement</h3>   
+   <ul class="entry">
+    <li>博客建设规划：</li>
+    <li>使用新的搜索方式</li>
+   </ul>   
+</div>  
+
+  <div class="widget tag">   
+   <h3 class="title">Music</h3>   
+   <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=270 height=86 src="//music.163.com/outchain/player?type=2&id=515404505&auto=0&height=66"></iframe>
+</div>  
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Daily-Life/">Daily Life</a><small>2</small></li>
+  
+    <li><a href="/categories/学习笔记/">学习笔记</a><small>4</small></li>
+  
+    <li><a href="/categories/比赛记录/">比赛记录</a><small>6</small></li>
+  
+    <li><a href="/categories/游记/">游记</a><small>1</small></li>
+  
+    <li><a href="/categories/解题报告/">解题报告</a><small>26</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Dfs/">Dfs</a><small>1</small></li>
+  
+    <li><a href="/tags/Dijkstra/">Dijkstra</a><small>1</small></li>
+  
+    <li><a href="/tags/Floyd/">Floyd</a><small>1</small></li>
+  
+    <li><a href="/tags/Hash/">Hash</a><small>2</small></li>
+  
+    <li><a href="/tags/KMP/">KMP</a><small>1</small></li>
+  
+    <li><a href="/tags/Lca/">Lca</a><small>2</small></li>
+  
+    <li><a href="/tags/STL/">STL</a><small>2</small></li>
+  
+    <li><a href="/tags/Spfa/">Spfa</a><small>1</small></li>
+  
+    <li><a href="/tags/Splay/">Splay</a><small>2</small></li>
+  
+    <li><a href="/tags/Treap/">Treap</a><small>6</small></li>
+  
+    <li><a href="/tags/Trie/">Trie</a><small>1</small></li>
+  
+    <li><a href="/tags/二分/">二分</a><small>2</small></li>
+  
+    <li><a href="/tags/位运算/">位运算</a><small>1</small></li>
+  
+    <li><a href="/tags/分块/">分块</a><small>2</small></li>
+  
+    <li><a href="/tags/前缀和/">前缀和</a><small>1</small></li>
+  
+    <li><a href="/tags/动态规划/">动态规划</a><small>6</small></li>
+  
+    <li><a href="/tags/博弈论/">博弈论</a><small>1</small></li>
+  
+    <li><a href="/tags/卡常数/">卡常数</a><small>2</small></li>
+  
+    <li><a href="/tags/堆/">堆</a><small>2</small></li>
+  
+    <li><a href="/tags/字符串/">字符串</a><small>1</small></li>
+  
+    <li><a href="/tags/差分/">差分</a><small>1</small></li>
+  
+    <li><a href="/tags/平衡树/">平衡树</a><small>8</small></li>
+  
+    <li><a href="/tags/并查集/">并查集</a><small>3</small></li>
+  
+    <li><a href="/tags/拓扑排序/">拓扑排序</a><small>1</small></li>
+  
+    <li><a href="/tags/搜索/">搜索</a><small>1</small></li>
+  
+    <li><a href="/tags/数学/">数学</a><small>4</small></li>
+  
+    <li><a href="/tags/期望/">期望</a><small>1</small></li>
+  
+    <li><a href="/tags/枚举/">枚举</a><small>2</small></li>
+  
+    <li><a href="/tags/栈/">栈</a><small>1</small></li>
+  
+    <li><a href="/tags/树状数组/">树状数组</a><small>2</small></li>
+  
+    <li><a href="/tags/树链剖分/">树链剖分</a><small>2</small></li>
+  
+    <li><a href="/tags/模拟/">模拟</a><small>7</small></li>
+  
+    <li><a href="/tags/矩阵乘法/">矩阵乘法</a><small>1</small></li>
+  
+    <li><a href="/tags/线段树/">线段树</a><small>3</small></li>
+  
+    <li><a href="/tags/莫队算法/">莫队算法</a><small>2</small></li>
+  
+    <li><a href="/tags/计算几何/">计算几何</a><small>1</small></li>
+  
+    <li><a href="/tags/贪心/">贪心</a><small>4</small></li>
+  
+    <li><a href="/tags/链表/">链表</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2018/01/22/January Talking/index/">January Talking</a>
+      </li>
+    
+      <li>
+        <a href="/2018/01/22/Luogu P2590 解题报告/index/">Luogu P2590 解题报告</a>
+      </li>
+    
+      <li>
+        <a href="/2018/01/22/Luogu P3258 解题报告/index/">Luogu P3258 解题报告</a>
+      </li>
+    
+      <li>
+        <a href="/2018/01/12/Luogu P2286 解题报告/index/">Luogu P2286 解题报告</a>
+      </li>
+    
+      <li>
+        <a href="/2018/01/12/Luogu P2234 解题报告/index/">Luogu P2234 解题报告</a>
+      </li>
+    
+      <li>
+        <a href="/2018/01/12/Luogu P3391 解题报告/index/">Luogu P3391 解题报告</a>
+      </li>
+    
+      <li>
+        <a href="/2018/01/11/Luogu P1486 解题报告/index/">Luogu P1486 解题报告</a>
+      </li>
+    
+      <li>
+        <a href="/2018/01/11/非旋转Treap 学习笔记/index/">非旋转Treap 学习笔记</a>
+      </li>
+    
+      <li>
+        <a href="/2017/12/27/Luogu P2572 解题报告/index/">Luogu P2572 解题报告</a>
+      </li>
+    
+      <li>
+        <a href="/2017/12/23/CodePlus2017-12月赛 Div.2/index/">CodePlus2017-12月赛 Div.2</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  <div class="widget tag">   
+   <h3 class="title">Links</h3>   
+   <ul class="entry">
+    <li><a href="https://www.cnblogs.com/Leonard-" title="Leonard_T">Leonard_T</a></li>
+    <li><a href="http://sshpark.com.cn" title="sshpark">sshpark</a></li>
+    <li><a href="https://www.cnblogs.com/zhaoyz/" title="__AiR_H">__AiR_H</a></li>
+    <li><a href="https://ksyx.cf" title="酷暑一夏1">酷暑一夏1</a></li>
+   </ul>   
+</div>  
+
+  <div class="widget tag">   
+   <h3 class="title">Count</h3>
+   <ul class="entry">   
+    <a href="http://xyz.freelogs.com/stats/j/johnsonsky/" target="_top"><img border="0" alt="free invisible web counter" src="http://xyz.freelogs.com/counter/index.php?u=johnsonsky&s=ocr" ALIGN="middle" HSPACE="4" VSPACE="2" align="center"></a><script src=http://xyz.freelogs.com/counter/script.php?u=johnsonsky></script>
+   </ul>   
+</div>  
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2018 Johnson
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/search.js"></script> 
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+</body>
+</html>
